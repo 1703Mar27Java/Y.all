@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import com.revature.beans.Post;
 import com.revature.dao.util.HibernateUtil;
 
-import one.to.many.Cave;
-
 public class PostDaoImpl implements PostDao {
 
 	@Override
