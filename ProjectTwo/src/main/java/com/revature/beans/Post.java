@@ -1,10 +1,13 @@
 package com.revature.beans;
 
-import java.io.InputStream;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.io.*;
+import java.sql.*;
 
 public class Post implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5588324711462153938L;
 	private int POST_ID;
 	private int POST_PARENT;
 	private Timestamp POST_TIME;
