@@ -3,103 +3,119 @@ package com.revature.beans;
 import java.io.*;
 import java.sql.*;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "POST")
 public class Post implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5588324711462153938L;
-	private int POST_ID;
-	private int POST_PARENT;
-	private Timestamp POST_TIME;
-	private String POST_NAME;
-	private String POST_SUBJECT;
-	private String POST_COMMENT;
-	private InputStream POST_IMAGE;
 
-	public int getPOST_ID() {
-		return POST_ID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "postSeq")
+	@SequenceGenerator(allocationSize = 1, name = "postSeq", sequenceName = "POST_SEQ")
+	@Column(name = "POST_ID")
+	private int id;
+
+	@Column(name = "POST_PARENT")
+	private int parent;
+
+	@Column(name = "POST_TIME")
+	private Timestamp time;
+
+	@Column(name = "POST_NAME")
+	private String name;
+
+	@Column(name = "POST_SUBJECT")
+	private String subject;
+
+	@Column(name = "POST_COMMENT")
+	private String comment;
+
+	@Column(name = "POST_IMAGE")
+	private InputStream image;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setPOST_ID(int pOST_ID) {
-		POST_ID = pOST_ID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getPOST_PARENT() {
-		return POST_PARENT;
+	public int getParent() {
+		return parent;
 	}
 
-	public void setPOST_PARENT(int pOST_PARENT) {
-		POST_PARENT = pOST_PARENT;
+	public void setParent(int parent) {
+		this.parent = parent;
 	}
 
-	public Timestamp getPOST_TIME() {
-		return POST_TIME;
+	public Timestamp getTime() {
+		return time;
 	}
 
-	public void setPOST_TIME(Timestamp pOST_TIME) {
-		POST_TIME = pOST_TIME;
+	public void setTime(Timestamp time) {
+		this.time = time;
 	}
 
-	public String getPOST_NAME() {
-		return POST_NAME;
+	public String getName() {
+		return name;
 	}
 
-	public void setPOST_NAME(String pOST_NAME) {
-		POST_NAME = pOST_NAME;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPOST_SUBJECT() {
-		return POST_SUBJECT;
+	public String getSubject() {
+		return subject;
 	}
 
-	public void setPOST_SUBJECT(String pOST_SUBJECT) {
-		POST_SUBJECT = pOST_SUBJECT;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
-	public String getPOST_COMMENT() {
-		return POST_COMMENT;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setPOST_COMMENT(String pOST_COMMENT) {
-		POST_COMMENT = pOST_COMMENT;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
-	public InputStream getPOST_IMAGE() {
-		return POST_IMAGE;
+	public InputStream getImage() {
+		return image;
 	}
 
-	public void setPOST_IMAGE(InputStream pOST_IMAGE) {
-		POST_IMAGE = pOST_IMAGE;
+	public void setImage(InputStream image) {
+		this.image = image;
 	}
 
 	public Post() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Post(int pOST_ID, int pOST_PARENT, Timestamp pOST_TIME, String pOST_NAME, String pOST_SUBJECT,
-			String pOST_COMMENT, InputStream pOST_IMAGE) {
-		super();
-		POST_ID = pOST_ID;
-		POST_PARENT = pOST_PARENT;
-		POST_TIME = pOST_TIME;
-		POST_NAME = pOST_NAME;
-		POST_SUBJECT = pOST_SUBJECT;
-		POST_COMMENT = pOST_COMMENT;
-		POST_IMAGE = pOST_IMAGE;
+	public Post(int id, int parent, Timestamp time, String name, String subject, String comment, InputStream image) {
+		this();
+		this.id = id;
+		this.parent = parent;
+		this.time = time;
+		this.name = name;
+		this.subject = subject;
+		this.comment = comment;
+		this.image = image;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((POST_COMMENT == null) ? 0 : POST_COMMENT.hashCode());
-		result = prime * result + POST_ID;
-		result = prime * result + ((POST_IMAGE == null) ? 0 : POST_IMAGE.hashCode());
-		result = prime * result + ((POST_NAME == null) ? 0 : POST_NAME.hashCode());
-		result = prime * result + POST_PARENT;
-		result = prime * result + ((POST_SUBJECT == null) ? 0 : POST_SUBJECT.hashCode());
-		result = prime * result + ((POST_TIME == null) ? 0 : POST_TIME.hashCode());
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + parent;
+		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		return result;
 	}
 
@@ -112,43 +128,42 @@ public class Post implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Post other = (Post) obj;
-		if (POST_COMMENT == null) {
-			if (other.POST_COMMENT != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!POST_COMMENT.equals(other.POST_COMMENT))
+		} else if (!comment.equals(other.comment))
 			return false;
-		if (POST_ID != other.POST_ID)
+		if (id != other.id)
 			return false;
-		if (POST_IMAGE == null) {
-			if (other.POST_IMAGE != null)
+		if (image == null) {
+			if (other.image != null)
 				return false;
-		} else if (!POST_IMAGE.equals(other.POST_IMAGE))
+		} else if (!image.equals(other.image))
 			return false;
-		if (POST_NAME == null) {
-			if (other.POST_NAME != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!POST_NAME.equals(other.POST_NAME))
+		} else if (!name.equals(other.name))
 			return false;
-		if (POST_PARENT != other.POST_PARENT)
+		if (parent != other.parent)
 			return false;
-		if (POST_SUBJECT == null) {
-			if (other.POST_SUBJECT != null)
+		if (subject == null) {
+			if (other.subject != null)
 				return false;
-		} else if (!POST_SUBJECT.equals(other.POST_SUBJECT))
+		} else if (!subject.equals(other.subject))
 			return false;
-		if (POST_TIME == null) {
-			if (other.POST_TIME != null)
+		if (time == null) {
+			if (other.time != null)
 				return false;
-		} else if (!POST_TIME.equals(other.POST_TIME))
+		} else if (!time.equals(other.time))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Post [POST_ID=" + POST_ID + ", POST_PARENT=" + POST_PARENT + ", POST_TIME=" + POST_TIME + ", POST_NAME="
-				+ POST_NAME + ", POST_SUBJECT=" + POST_SUBJECT + ", POST_COMMENT=" + POST_COMMENT + ", POST_IMAGE="
-				+ POST_IMAGE + "]";
+		return "Post [POST_ID=" + id + ", POST_PARENT=" + parent + ", POST_TIME=" + time + ", POST_NAME=" + name
+				+ ", POST_SUBJECT=" + subject + ", POST_COMMENT=" + comment + ", POST_IMAGE=" + image + "]";
 	}
 
 }
