@@ -17,6 +17,7 @@ public class PostDaoImpl implements PostDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> loadAll() throws SQLException {
 		List<Post> posts = new ArrayList<>();
