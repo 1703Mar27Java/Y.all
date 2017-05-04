@@ -1,6 +1,7 @@
 package com.revature.main;
 
-import java.sql.Timestamp;
+import java.io.*;
+import java.sql.*;
 
 import org.hibernate.*;
 import org.springframework.context.*;
@@ -20,12 +21,13 @@ public class TestMain {
 		testPost.setParent(0);
 		testPost.setTime(new Timestamp(System.currentTimeMillis()));
 		testPost.setName("Mehrab");
-		testPost.setSubject("TestTopic1");
+		testPost.setSubject("TestTopic");
 		testPost.setComment("Test Comment Lorem Ipsum");
-
+		//testPost.setImage(new ByteArrayInputStream( "Hello".getBytes() ));
+		session.save(testPost);
+		
 		tx.commit();
 		session.close();
-		((AbstractApplicationContext) context).close();
 	}
 
 }
