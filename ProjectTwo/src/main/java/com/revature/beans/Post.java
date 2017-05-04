@@ -90,6 +90,21 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		this.image = image;
 	}
 
+	public Post() {
+		super();
+	}
+
+	public Post(int id, int parent, Timestamp time, String name, String subject, String comment, InputStream image) {
+		this();
+		this.id = id;
+		this.parent = parent;
+		this.time = time;
+		this.name = name;
+		this.subject = subject;
+		this.comment = comment;
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Post [POST_ID=" + id + ", POST_PARENT=" + parent + ", POST_TIME=" + time + ", POST_NAME=" + name
