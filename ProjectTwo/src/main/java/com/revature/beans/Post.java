@@ -15,6 +15,9 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	@SequenceGenerator(allocationSize = 1, name = "postSeq", sequenceName = "POST_SEQ")
 	@Column(name = "POST_ID")
 	private int id;
+	
+	@Column(name = "POST_FLAG")
+	private int flag;
 
 	@Column(name = "POST_PARENT")
 	private int parent;
@@ -40,6 +43,14 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public int getParent() {
@@ -94,9 +105,10 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		super();
 	}
 
-	public Post(int id, int parent, Timestamp time, String name, String subject, String comment, byte[] image) {
+	public Post(int id, int flag, int parent, Timestamp time, String name, String subject, String comment, byte[] image) {
 		this();
 		this.id = id;
+		this.flag = flag;
 		this.parent = parent;
 		this.time = time;
 		this.name = name;
