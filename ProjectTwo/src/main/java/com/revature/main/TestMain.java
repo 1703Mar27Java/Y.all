@@ -1,6 +1,5 @@
 package com.revature.main;
 
-import java.io.*;
 import java.sql.*;
 
 import org.hibernate.*;
@@ -28,6 +27,7 @@ public class TestMain {
 		
 		tx.commit();
 		session.close();
+		((AbstractApplicationContext) context).close();
 	}
 
 }
