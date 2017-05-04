@@ -13,6 +13,7 @@ import org.springframework.context.support.*;
 import com.revature.beans.*;
 import com.revature.dao.util.HibernateUtil;
 
+@javax.servlet.annotation.MultipartConfig
 public class NewThreadServlet extends HttpServlet implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -24,15 +25,29 @@ public class NewThreadServlet extends HttpServlet implements Serializable{
 			Transaction tx = hsesh.beginTransaction();
 			
 			Post testPost = (Post) context.getBean("post");
-
+			
 			testPost.setParent(0);
 			testPost.setTime(new Timestamp(System.currentTimeMillis()));
 			testPost.setName(req.getParameter("name"));
 			testPost.setSubject(req.getParameter("subject"));
 			testPost.setComment(req.getParameter("comment"));
-			//testPost.setImage(new ByteArrayInputStream( "Hello".getBytes() ));
-			hsesh.save(testPost);
 			
+			
+			/**Jade: added image upload to servlet**/
+			Part filePart = req.getPart("pic");
+			InputStream input = filePart.getInputStream();
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			int nRead;
+			byte[] data = new byte[16384];
+			while ((nRead = input.read(data, 0, data.length)) != -1) {
+			  buffer.write(data, 0, nRead);
+			}
+			buffer.flush();
+			byte[] imgData = buffer.toByteArray();
+			testPost.setImage(imgData);
+			
+			
+			hsesh.save(testPost);
 			tx.commit();
 			hsesh.close();
 			((AbstractApplicationContext) context).close();
