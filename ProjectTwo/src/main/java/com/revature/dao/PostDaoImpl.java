@@ -13,8 +13,6 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public int create(Post post) throws SQLException {
 		return 0;
-		// TODO Auto-generated method stub
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,8 +35,6 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public int delete(Post post) throws SQLException {
 		return 0;
-		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -32,7 +32,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	private String comment;
 
 	@Column(name = "POST_IMAGE")
-	private InputStream image;
+	private Blob image;
 
 	public int getId() {
 		return id;
@@ -82,11 +82,26 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		this.comment = comment;
 	}
 
-	public InputStream getImage() {
+	public Blob getImage() {
 		return image;
 	}
 
-	public void setImage(InputStream image) {
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+
+	public Post() {
+		super();
+	}
+
+	public Post(int id, int parent, Timestamp time, String name, String subject, String comment, Blob image) {
+		this();
+		this.id = id;
+		this.parent = parent;
+		this.time = time;
+		this.name = name;
+		this.subject = subject;
+		this.comment = comment;
 		this.image = image;
 	}
 
