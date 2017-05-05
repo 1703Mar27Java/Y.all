@@ -36,6 +36,14 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 
 	@Column(name = "POST_IMAGE")
 	private byte[] image;
+	private String imageString;
+	
+	public String getImageString(){
+		return imageString;
+	}
+	public void setImageString(String s){
+		this.imageString = s;
+	}
 
 	public int getId() {
 		return id;
