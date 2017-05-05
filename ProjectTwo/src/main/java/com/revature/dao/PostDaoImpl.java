@@ -1,10 +1,9 @@
 package com.revature.dao;
 
 import java.util.*;
+
 import org.hibernate.*;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.*;
 
 import com.revature.beans.Post;
 
@@ -19,56 +18,42 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public void create(Post p) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
 		session.save(p);
-		ac.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> loadAll() {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Post> posts = session.createQuery("from Post").list();
-		ac.close();
-		return posts;
+		return session.createQuery("from Post").list();
 	}
 
 	@Override
 	public Post loadId(int id) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
 		Post p = (Post) session.load(Post.class, new Integer(id));
-		ac.close();
 		return p;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> loadThread(int id) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
-		String hql = "from Post where id = " + id;
-		List<Post> posts = session.createQuery(hql).list();
-		ac.close();
-		return posts;
+		String hql = "FROM Post P where P.id = " + id;
+		return session.createQuery(hql).list();
 	}
 
 	@Override
 	public void update(Post p) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(p);
-		ac.close();
 	}
 
 	@Override
 	public void delete(Post p) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		Session session = this.sessionFactory.getCurrentSession();
 		session.delete(p);
-		ac.close();
 	}
 
 }
