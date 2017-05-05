@@ -40,7 +40,7 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public List<Post> loadThread(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		String hql = "FROM Post P where P.id = " + id;
+		String hql = "FROM Post P where P.parent = " + id;
 		return session.createQuery(hql).list();
 	}
 

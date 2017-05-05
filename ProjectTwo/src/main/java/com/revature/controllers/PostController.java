@@ -3,24 +3,14 @@ package com.revature.controllers;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
-import com.revature.service.*;
 
 @Controller
 public class PostController {
-	
-	/*private PostService postService;
-	
-	@Autowired
-	@Qualifier(value="service")
-	public void setPostService (PostService ps) {
-		this.postService = ps;
-	}*/
 	
 	@RequestMapping(value = "index")
 	public String getThreads(Model m) {
