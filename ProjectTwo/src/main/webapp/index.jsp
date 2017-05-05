@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,5 +18,15 @@
 				<input type="submit" value="Post" />
 		</form>
 	</div>
+	
+	<ul>
+	<c:forEach var="row" items="${posts}">
+		<li><a target="_blank" href="data:image/png;base64,${row}">
+			<img id="pic" src="data:image/png;base64,${row}" style="width:150px;">
+			</a>
+		</li>
+	</c:forEach>
+	</ul>
+	
 </body>
 </html>
