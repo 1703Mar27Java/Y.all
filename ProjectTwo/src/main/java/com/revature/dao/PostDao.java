@@ -1,14 +1,18 @@
 package com.revature.dao;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import com.revature.beans.*;
 
 public interface PostDao {
-	public List<Post> loadAll() throws SQLException;
+	public void create(Post p);
+	
+	public List<Post> loadAll();
+	
+	public Post loadId(int id);
 
-	public void update(Post post) throws SQLException;
+	public List<Post> loadThread(int id);
 
-	public int delete(Post post) throws SQLException;
+	public void update(Post p);
+
+	public void delete(Post p);
 }

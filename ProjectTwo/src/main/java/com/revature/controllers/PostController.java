@@ -1,40 +1,51 @@
 package com.revature.controllers;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.*;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
+import com.revature.service.*;
 
 @Controller
-@RequestMapping("/thread")
 public class PostController {
-	@RequestMapping(value = "/{threadId}", method = RequestMethod.GET)
+	
+	/*private PostService postService;
+	
+	@Autowired
+	@Qualifier(value="service")
+	public void setPostService (PostService ps) {
+		this.postService = ps;
+	}*/
+	
+	@RequestMapping(value = "index")
+	public String getThreads(Model m) {
+		PostDao dao = new PostDaoImpl();
+		m.addAttribute("listThreads", dao.loadAll());
+		return "index";
+	}
+	
+	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		PostDao dao = new PostDaoImpl();
-		try {
-			List<Post> posts = dao.loadAll();
-			List<Post> filtered = new ArrayList<>();
-			for (Post i : posts) {
-				if (i.getParent() == threadId)
-					filtered.add(i);
-			}
-			m.addAttribute("filtered", filtered);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		m.addAttribute("threadId", threadId);
+		m.addAttribute("listPosts", dao.loadThread(threadId));
 		return "thread";
 	}
 
-	@RequestMapping(value = "/addPost", method = RequestMethod.GET)
-	public String addPost(Model m) {
-		m.addAttribute("post", new Post());
+	@RequestMapping(value = "thread/{threadId}/reply",method=RequestMethod.POST)
+	public String addPost(@ModelAttribute("post") Post p) {
+		PostDao dao = new PostDaoImpl();
+		dao.create(p);;
+		return "thread";
+	}
+	
+	@RequestMapping(value = "thread/{threadId}/delete")
+	public String removePost(@ModelAttribute("post") Post p) {
+		PostDao dao = new PostDaoImpl();
+		dao.delete(p);
 		return "thread";
 	}
 
