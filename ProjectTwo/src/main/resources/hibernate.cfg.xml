@@ -15,5 +15,6 @@
 		
 		<!-- map domains -->
 		<mapping class="com.revature.beans.Post"/>
+		<mapping class="com.revature.beans.Moderator"/>
 	</session-factory>
 </hibernate-configuration>
