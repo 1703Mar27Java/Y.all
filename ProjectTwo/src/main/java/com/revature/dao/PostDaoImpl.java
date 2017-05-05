@@ -4,16 +4,12 @@ import java.sql.*;
 import java.util.*;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.revature.beans.Post;
 import com.revature.dao.util.HibernateUtil;
 
 public class PostDaoImpl implements PostDao {
-
-	@Override
-	public int create(Post post) throws SQLException {
-		return 0;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -25,11 +21,12 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public int update(Post post) throws SQLException {
+	public void update(Post post) throws SQLException {
 		Session s = HibernateUtil.getSession();
-		int result = (int) s.save(post);
+		Transaction tx = s.beginTransaction();
+		s.persist(post);
+		tx.commit();
 		s.close();
-		return result;
 	}
 
 	@Override
