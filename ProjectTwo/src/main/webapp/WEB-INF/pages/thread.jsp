@@ -6,23 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Thread</title>
+<title>Index</title>
 </head>
 <body>
+
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>Subject</th>
 			<th>Comment</th>
 		</tr>
-
-		<c:forEach var="row" items="${listPosts}">
-			<tr>
-				<td><c:out value="${row.getName()}" /></td>
-				<td><c:out value="${row.getSubject()}" /></td>
-				<td><c:out value="${row.getComment()}" /></td>
-			</tr>
-		</c:forEach>
 	</table>
 </body>
 </html>

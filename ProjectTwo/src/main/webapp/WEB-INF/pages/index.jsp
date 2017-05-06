@@ -5,16 +5,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Index</title>
+<title>Insert title here</title>
 </head>
 <body>
+	<div id="postForm">
+		<h3>Start New Thread</h3>
+		
+	</div>
+	
 	<table>
-		<tr>
-			<th>Name</th>
-			<th>Subject</th>
-			<th>Comment</th>
+	<c:forEach var="row" items="${listThreads}">
+		<tr><td><a target="_blank" href="data:image/png;base64,${row.getImageString()}">
+				<img id="pic" src="data:image/png;base64,${row.getImageString()}" style="width:150px;"></a>
+			</td>
 		</tr>
+		<tr>
+				<td><c:out value="${row.getName()}" /></td>
+				<td><c:out value="${row.getSubject()}" /></td>
+				<td><c:out value="${row.getComment()}" /></td>
+		</tr>
+	</c:forEach>
 	</table>
+	
 </body>
 </html>

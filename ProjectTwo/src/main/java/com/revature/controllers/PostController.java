@@ -17,6 +17,7 @@ public class PostController {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		m.addAttribute("listThreads", dao.loadAll());
+		m.addAttribute("post", new Post());
 		return "index";
 	}
 	
@@ -33,7 +34,7 @@ public class PostController {
 	public String addPost(@ModelAttribute("post") Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		dao.create(p);;
+		dao.create(p);
 		return "thread";
 	}
 	
