@@ -17,6 +17,16 @@ public class PostController {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		m.addAttribute("listThreads", dao.loadAll());
+		m.addAttribute("command", new Post());
+		return "index";
+	}
+
+	@RequestMapping(value = "index",method=RequestMethod.POST)
+	public String addThread(@ModelAttribute("command") Post p) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		//dao.create(p);
+		System.out.println(p.toString());
 		return "index";
 	}
 	
@@ -24,16 +34,18 @@ public class PostController {
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
+		m.addAttribute("command", new Post());
 		m.addAttribute("threadId", threadId);
 		m.addAttribute("listPosts", dao.loadThread(threadId));
 		return "thread";
 	}
 
-	@RequestMapping(value = "thread/{threadId}/reply",method=RequestMethod.POST)
-	public String addPost(@ModelAttribute("post") Post p) {
+	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.POST)
+	public String addPost(@ModelAttribute("command") Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		dao.create(p);;
+		//dao.create(p);
+		System.out.println(p.toString());
 		return "thread";
 	}
 	

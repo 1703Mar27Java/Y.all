@@ -3,6 +3,8 @@ package com.revature.beans;
 import java.io.*;
 import java.sql.*;
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.*;
 
 @Entity
@@ -68,7 +70,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-
+	
 	public String getName() {
 		return name;
 	}

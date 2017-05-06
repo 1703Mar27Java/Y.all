@@ -9,12 +9,43 @@
 <title>Index</title>
 </head>
 <body>
+	<form:form method="post" action="index" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>Subject:</td>
+				<td><input type="text" name="subject" /></td>
+			</tr>
+			<tr>
+				<td>Comment:</td>
+				<td><input type="text" name="comment" /></td>
+			</tr>
+			<tr>
+				<td>File:</td>
+				<td><input type="file" name="image" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					value="Post" /></td>
+			</tr>
+		</table>
+	</form:form>
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>Subject</th>
 			<th>Comment</th>
 		</tr>
+		<c:forEach var="row" items="${listPosts}">
+			<tr>
+				<td><c:out value="${row.getName()}" /></td>
+				<td><c:out value="${row.getSubject()}" /></td>
+				<td><c:out value="${row.getComment()}" /></td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

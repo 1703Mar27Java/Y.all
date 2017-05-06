@@ -9,6 +9,30 @@
 <title>Thread</title>
 </head>
 <body>
+	<form:form method="post" action="thread/${threadId}" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>Subject:</td>
+				<td><input type="text" name="subject" /></td>
+			</tr>
+			<tr>
+				<td>Comment:</td>
+				<td><input type="text" name="comment" /></td>
+			</tr>
+			<tr>
+				<td>File:</td>
+				<td><input type="file" name="image" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					value="Post" /></td>
+			</tr>
+		</table>
+	</form:form>
 	<table>
 		<tr>
 			<th>Name</th>

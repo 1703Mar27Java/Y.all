@@ -18,3 +18,25 @@
 2017-05-05 17:48:04 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
 2017-05-05 17:48:05 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@37d3d232] of Hibernate SessionFactory for HibernateTransactionManager
 2017-05-05 17:48:07 INFO  ClassPathXmlApplicationContext:960 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@3f8f9dd6: startup date [Fri May 05 17:47:59 EDT 2017]; root of context hierarchy
+2017-05-06 01:39:11 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3f8f9dd6: startup date [Sat May 06 01:39:11 EDT 2017]; root of context hierarchy
+2017-05-06 01:39:11 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2017-05-06 01:39:12 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2017-05-06 01:39:12 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2017-05-06 01:39:12 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2017-05-06 01:39:12 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2017-05-06 01:39:15 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3f8f9dd6: startup date [Sat May 06 01:39:15 EDT 2017]; root of context hierarchy
+2017-05-06 01:39:15 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2017-05-06 01:39:16 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2017-05-06 01:39:16 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2017-05-06 01:39:16 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2017-05-06 01:39:16 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2017-05-06 01:39:16 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2017-05-06 01:39:17 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2017-05-06 01:39:17 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-05-06 01:39:18 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@37d3d232] of Hibernate SessionFactory for HibernateTransactionManager
+2017-05-06 01:39:18 INFO  ClassPathXmlApplicationContext:960 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@3f8f9dd6: startup date [Sat May 06 01:39:11 EDT 2017]; root of context hierarchy
+2017-05-06 01:39:20 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2017-05-06 01:39:21 INFO  TransactionFactoryInitiator:62 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2017-05-06 01:39:21 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-05-06 01:39:21 INFO  HibernateTransactionManager:360 - Using DataSource [org.apache.commons.dbcp.BasicDataSource@37d3d232] of Hibernate SessionFactory for HibernateTransactionManager
+2017-05-06 01:39:22 INFO  ClassPathXmlApplicationContext:960 - Closing org.springframework.context.support.ClassPathXmlApplicationContext@3f8f9dd6: startup date [Sat May 06 01:39:15 EDT 2017]; root of context hierarchy
