@@ -1,40 +1,59 @@
 package com.revature.dao;
 
-import java.sql.*;
 import java.util.*;
 
-import org.hibernate.Session;
+import org.hibernate.*;
+import org.springframework.transaction.annotation.*;
 
 import com.revature.beans.Post;
-import com.revature.dao.util.HibernateUtil;
 
+@Transactional
 public class PostDaoImpl implements PostDao {
 
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sf) {
+		this.sessionFactory = sf;
+	}
+
 	@Override
-	public int create(Post post) throws SQLException {
-		return 0;
+	public void create(Post p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.save(p);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Post> loadAll() throws SQLException {
-		List<Post> posts = new ArrayList<>();
-		Session session = HibernateUtil.getSession();
-		posts = session.createQuery("from Post").list();
-		return posts;
+	public List<Post> loadAll() {
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("from Post").list();
 	}
 
 	@Override
-	public int update(Post post) throws SQLException {
-		Session s = HibernateUtil.getSession();
-		int result = (int) s.save(post);
-		s.close();
-		return result;
+	public Post loadId(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Post p = (Post) session.load(Post.class, new Integer(id));
+		return p;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Post> loadThread(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql = "FROM Post P where P.parent = " + id;
+		return session.createQuery(hql).list();
 	}
 
 	@Override
-	public int delete(Post post) throws SQLException {
-		return 0;
+	public void update(Post p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+	}
+
+	@Override
+	public void delete(Post p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.delete(p);
 	}
 
 }
