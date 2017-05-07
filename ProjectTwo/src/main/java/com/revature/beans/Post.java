@@ -4,9 +4,10 @@ import java.io.*;
 import java.sql.*;
 import javax.persistence.*;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.*;
+import org.springframework.stereotype.Component;
 
+@Component(value="post")
 @Entity
 @Table(name = "POST")
 public class Post implements InitializingBean, DisposableBean, Serializable {

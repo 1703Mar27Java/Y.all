@@ -10,24 +10,28 @@ import com.revature.beans.*;
 import com.revature.dao.*;
 
 @Controller
+@RequestMapping("/board")
 public class PostController {
 	
-	@RequestMapping(value = "index")
+	@RequestMapping(value = "/index",method=RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		m.addAttribute("listThreads", dao.loadAll());
-		m.addAttribute("command", new Post());
+		m.addAttribute("post", new Post());
 		return "index";
 	}
 
-	@RequestMapping(value = "index",method=RequestMethod.POST)
-	public String addThread(@ModelAttribute("command") Post p) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		PostDao dao = (PostDao) ac.getBean("myDao");
+	@RequestMapping(value = "/index",method=RequestMethod.POST)
+	public String addThread(@ModelAttribute("post") Post p, Model m) {
+		//AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		//PostDao dao = (PostDao) ac.getBean("myDao");
 		//dao.create(p);
 		System.out.println(p.toString());
-		return "index";
+		m.addAttribute("name", p.getName());
+		m.addAttribute("subject", p.getSubject());
+		m.addAttribute("comment", p.getComment());
+		return "result";
 	}
 	
 	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.GET)
