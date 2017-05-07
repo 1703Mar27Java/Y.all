@@ -28,10 +28,13 @@ public class PostController {
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.create(p);
 		System.out.println(p.toString());
-		m.addAttribute("name", p.getName());
+		/*m.addAttribute("name", p.getName());
 		m.addAttribute("subject", p.getSubject());
 		m.addAttribute("comment", p.getComment());
-		return "result";
+		m.addAttribute("image", p.getImage());
+		*/
+		m.addAttribute("listThreads", dao.loadAll());
+		return "index"; //was result
 	}
 
 	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.GET)

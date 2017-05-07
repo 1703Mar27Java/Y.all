@@ -7,30 +7,11 @@
 <head>
 <title>Insert title here</title>
 </head>
-<body>
-	<div id="postForm">
-		<h3>Start New Thread</h3>
-		
-	</div>
-	
-	<table>
-	<c:forEach var="row" items="${listThreads}">
-		<tr><td><a target="_blank" href="data:image/png;base64,${row.getImageString()}">
-				<img id="pic" src="data:image/png;base64,${row.getImageString()}" style="width:150px;"></a>
-			</td>
-		</tr>
-		<tr>
-				<td><c:out value="${row.getName()}" /></td>
-				<td><c:out value="${row.getSubject()}" /></td>
-				<td><c:out value="${row.getComment()}" /></td>
-		</tr>
-	</c:forEach>
-	</table>
-	
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Index</title>
 </head>
 <body>
+	<h3>Start New Thread</h3>
 	<form:form method="POST" action="index" modelAttribute="post">
 		<table>
 			<tr>
@@ -52,18 +33,18 @@
 		</table>
 	</form:form>
 	<table>
+	<c:forEach var="row" items="${listThreads}">
 		<tr>
-			<th>Name</th>
-			<th>Subject</th>
-			<th>Comment</th>
 		</tr>
-		<c:forEach var="row" items="${listPosts}">
-			<tr>
+		<tr>
+				<td><a target="_blank" href="data:image/png;base64,${row.getImageString()}">
+					<img id="pic" src="data:image/png;base64,${row.getImageString()}" style="width:150px;"></a>
+				</td>
 				<td><c:out value="${row.getName()}" /></td>
 				<td><c:out value="${row.getSubject()}" /></td>
 				<td><c:out value="${row.getComment()}" /></td>
-			</tr>
-		</c:forEach>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>
