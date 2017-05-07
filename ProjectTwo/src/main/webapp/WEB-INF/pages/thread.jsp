@@ -6,12 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<<<<<<< HEAD
-<title>Index</title>
-</head>
-<body>
-
-=======
 <title>Thread</title>
 </head>
 <body>
@@ -39,15 +33,13 @@
 			</tr>
 		</table>
 	</form:form>
->>>>>>> UserCreatePost
+
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>Subject</th>
 			<th>Comment</th>
 		</tr>
-<<<<<<< HEAD
-=======
 
 		<c:forEach var="row" items="${listPosts}">
 			<tr>
@@ -56,7 +48,6 @@
 				<td><c:out value="${row.getComment()}" /></td>
 			</tr>
 		</c:forEach>
->>>>>>> UserCreatePost
 	</table>
 </body>
 </html>
