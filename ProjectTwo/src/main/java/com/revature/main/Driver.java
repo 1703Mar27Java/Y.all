@@ -15,7 +15,6 @@ public class Driver {
 		newPost.setComment("hello world");
 		dao.create(newPost);
 		System.out.println(newPost.toString());
-		System.out.println(dao.loadAll());
 		
 		ac.close();
 

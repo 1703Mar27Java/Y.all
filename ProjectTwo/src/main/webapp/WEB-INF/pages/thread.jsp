@@ -9,23 +9,19 @@
 <title>Thread</title>
 </head>
 <body>
-	<form:form method="post" action="thread/${threadId}" enctype="multipart/form-data">
+	<form:form method="POST" action="thread/${threadId}" modelAttribute="post">
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td><input type="text" name="name" /></td>
+				<td><form:input path="name" /></td>
 			</tr>
 			<tr>
 				<td>Subject:</td>
-				<td><input type="text" name="subject" /></td>
+				<td><form:input path="subject" /></td>
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><input type="text" name="comment" /></td>
-			</tr>
-			<tr>
-				<td>File:</td>
-				<td><input type="file" name="image" /></td>
+				<td><form:input path="comment" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

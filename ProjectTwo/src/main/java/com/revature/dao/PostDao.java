@@ -6,9 +6,9 @@ import com.revature.beans.*;
 public interface PostDao {
 	public void create(Post p);
 	
-	public List<Post> loadAll();
+	public List<Post> loadFlags();
 	
-	public Post loadId(int id);
+	public Post loadPost(int id);
 
 	public List<Post> loadThread(int id);
 

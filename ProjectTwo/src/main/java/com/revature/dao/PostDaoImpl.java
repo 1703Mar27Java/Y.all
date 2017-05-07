@@ -24,13 +24,14 @@ public class PostDaoImpl implements PostDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Post> loadAll() {
+	public List<Post> loadFlags() {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("from Post").list();
+		String hql = "FROM Post P WHERE P.flag = 1";
+		return session.createQuery(hql).list();
 	}
 
 	@Override
-	public Post loadId(int id) {
+	public Post loadPost(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Post p = (Post) session.load(Post.class, new Integer(id));
 		return p;
@@ -40,7 +41,7 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public List<Post> loadThread(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		String hql = "FROM Post P where P.parent = " + id;
+		String hql = "FROM Post P WHERE P.parent = " + id;
 		return session.createQuery(hql).list();
 	}
 
@@ -53,6 +54,11 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public void delete(Post p) {
 		Session session = this.sessionFactory.getCurrentSession();
+		if (p.getParent() == 0) {
+			Query query = session.createQuery("DELETE Post WHERE parent = :parentId");
+			query.setParameter("parentId", p.getId());
+			query.executeUpdate();
+		}
 		session.delete(p);
 	}
 

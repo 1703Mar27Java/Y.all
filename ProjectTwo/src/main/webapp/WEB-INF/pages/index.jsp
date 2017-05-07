@@ -29,19 +29,18 @@
 			</tr>
 		</table>
 	</form:form>
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Subject</th>
-			<th>Comment</th>
-		</tr>
-		<c:forEach var="row" items="${listPosts}">
+	<c:forEach var="row" items="${listThreads}">
+		<table border="1px solid black">
 			<tr>
-				<td><c:out value="${row.getName()}" /></td>
-				<td><c:out value="${row.getSubject()}" /></td>
+				<td rowspan="2"><c:out value="${row.getImage()}" /></td>
+				<td><c:out
+						value="${row.getName()} ${row.getSubject()}" /><a
+					href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a></td>
+			</tr>
+			<tr>
 				<td><c:out value="${row.getComment()}" /></td>
 			</tr>
-		</c:forEach>
-	</table>
+		</table>
+	</c:forEach>
 </body>
 </html>

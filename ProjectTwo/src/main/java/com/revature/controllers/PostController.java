@@ -18,7 +18,7 @@ public class PostController {
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("listThreads", dao.loadAll());
+		m.addAttribute("listThreads", dao.loadThread(0));
 		m.addAttribute("post", new Post());
 		return "index";
 	}
@@ -28,34 +28,28 @@ public class PostController {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.create(p);
-		System.out.println(p.toString());
-		m.addAttribute("name", p.getName());
-		m.addAttribute("subject", p.getSubject());
-		m.addAttribute("comment", p.getComment());
-		return "result";
+		return "thread/" + p.getId();
 	}
 	
-	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.GET)
+	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("command", new Post());
-		m.addAttribute("threadId", threadId);
+		m.addAttribute("post", new Post());
 		m.addAttribute("listPosts", dao.loadThread(threadId));
 		return "thread";
 	}
 
-	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.POST)
-	public String addPost(@ModelAttribute("command") Post p) {
+	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.POST)
+	public String addPost(@ModelAttribute("post") @Validated Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		//dao.create(p);
-		System.out.println(p.toString());
+		dao.create(p);
 		return "thread";
 	}
 	
 	@RequestMapping(value = "thread/{threadId}/delete")
-	public String removePost(@ModelAttribute("post") Post p) {
+	public String removePost(@ModelAttribute("post") @Validated Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.delete(p);
