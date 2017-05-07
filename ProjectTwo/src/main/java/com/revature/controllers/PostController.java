@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -13,7 +14,7 @@ import com.revature.dao.*;
 @RequestMapping("/board")
 public class PostController {
 	
-	@RequestMapping(value = "/index",method=RequestMethod.GET)
+	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -22,11 +23,11 @@ public class PostController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/index",method=RequestMethod.POST)
-	public String addThread(@ModelAttribute("post") Post p, Model m) {
-		//AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		//PostDao dao = (PostDao) ac.getBean("myDao");
-		//dao.create(p);
+	@RequestMapping(value="/index",method=RequestMethod.POST)
+	public String addThread(@ModelAttribute("post") @Validated Post p, Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		dao.create(p);
 		System.out.println(p.toString());
 		m.addAttribute("name", p.getName());
 		m.addAttribute("subject", p.getSubject());

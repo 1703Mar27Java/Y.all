@@ -9,7 +9,7 @@
 <title>Index</title>
 </head>
 <body>
-	<form:form method="POST" action="index" enctype="multipart/form-data" commandName="post">
+	<form:form method="POST" action="index" modelAttribute="post">
 		<table>
 			<tr>
 				<td>Name:</td>
