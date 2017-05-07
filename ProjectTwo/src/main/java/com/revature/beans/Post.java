@@ -2,11 +2,20 @@ package com.revature.beans;
 
 import java.io.*;
 import java.sql.*;
+<<<<<<< HEAD
 import java.util.Base64;
 
 import javax.persistence.*;
 import org.springframework.beans.factory.*;
 
+=======
+import javax.persistence.*;
+
+import org.springframework.beans.factory.*;
+import org.springframework.stereotype.Component;
+
+@Component(value="post")
+>>>>>>> UserCreatePost
 @Entity
 @Table(name = "POST")
 public class Post implements InitializingBean, DisposableBean, Serializable {
@@ -17,7 +26,11 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	@SequenceGenerator(allocationSize = 1, name = "postSeq", sequenceName = "POST_SEQ")
 	@Column(name = "POST_ID")
 	private int id;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> UserCreatePost
 	@Column(name = "POST_FLAG")
 	private int flag;
 
@@ -70,7 +83,11 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> UserCreatePost
 	public String getName() {
 		return name;
 	}
@@ -99,6 +116,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		return image;
 	}
 
+<<<<<<< HEAD
 	public String getImageString() {
 		try {
 			if(image == null){
@@ -111,6 +129,8 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		}
 	}
 
+=======
+>>>>>>> UserCreatePost
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
@@ -119,8 +139,12 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		super();
 	}
 
+<<<<<<< HEAD
 	public Post(int id, int flag, int parent, Timestamp time, String name, String subject, String comment,
 			byte[] image) {
+=======
+	public Post(int id, int flag, int parent, Timestamp time, String name, String subject, String comment, byte[] image) {
+>>>>>>> UserCreatePost
 		this();
 		this.id = id;
 		this.flag = flag;
@@ -141,13 +165,21 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	@Override
 	public void destroy() throws Exception {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> UserCreatePost
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> UserCreatePost
 	}
 
 }

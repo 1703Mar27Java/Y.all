@@ -6,16 +6,57 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<<<<<<< HEAD
 <title>Index</title>
 </head>
 <body>
 
+=======
+<title>Thread</title>
+</head>
+<body>
+	<form:form method="post" action="thread/${threadId}" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>Subject:</td>
+				<td><input type="text" name="subject" /></td>
+			</tr>
+			<tr>
+				<td>Comment:</td>
+				<td><input type="text" name="comment" /></td>
+			</tr>
+			<tr>
+				<td>File:</td>
+				<td><input type="file" name="image" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					value="Post" /></td>
+			</tr>
+		</table>
+	</form:form>
+>>>>>>> UserCreatePost
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>Subject</th>
 			<th>Comment</th>
 		</tr>
+<<<<<<< HEAD
+=======
+
+		<c:forEach var="row" items="${listPosts}">
+			<tr>
+				<td><c:out value="${row.getName()}" /></td>
+				<td><c:out value="${row.getSubject()}" /></td>
+				<td><c:out value="${row.getComment()}" /></td>
+			</tr>
+		</c:forEach>
+>>>>>>> UserCreatePost
 	</table>
 </body>
 </html>
