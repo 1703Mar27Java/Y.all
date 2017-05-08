@@ -11,8 +11,7 @@
 <title>Index</title>
 </head>
 <body>
-	<h3>Start New Thread</h3>
-	<form:form method="POST" action="index" modelAttribute="post">
+	<form:form method="POST" action="catalog" modelAttribute="post">
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -24,7 +23,7 @@
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><form:input path="comment" /></td>
+				<td><form:textarea path="comment" rows="3" cols="20" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
@@ -32,19 +31,18 @@
 			</tr>
 		</table>
 	</form:form>
-	<table>
 	<c:forEach var="row" items="${listThreads}">
-		<tr>
-		</tr>
-		<tr>
-				<td><a target="_blank" href="data:image/png;base64,${row.getImageString()}">
-					<img id="pic" src="data:image/png;base64,${row.getImageString()}" style="width:150px;"></a>
-				</td>
-				<td><c:out value="${row.getName()}" /></td>
-				<td><c:out value="${row.getSubject()}" /></td>
+		<table border="1px solid black">
+			<tr>
+				<td rowspan="2"><c:out value="${row.getImageString()}" /></td>
+				<td><c:out
+						value="${row.getName()} ${row.getSubject()}" /><a
+					href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a></td>
+			</tr>
+			<tr>
 				<td><c:out value="${row.getComment()}" /></td>
-		</tr>
+			</tr>
+		</table>
 	</c:forEach>
-	</table>
 </body>
 </html>

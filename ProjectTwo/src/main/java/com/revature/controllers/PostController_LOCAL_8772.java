@@ -13,55 +13,55 @@ import com.revature.dao.*;
 @RequestMapping("/board")
 public class PostController {
 	
-	@RequestMapping(value="/catalog",method=RequestMethod.GET)
+	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("listThreads", dao.loadThread(0));
+		m.addAttribute("listThreads", dao.loadAll());
 		m.addAttribute("post", new Post());
-		ac.close();
-		return "catalog";
+		return "index";
 	}
 
-	@RequestMapping(value="/catalog",method=RequestMethod.POST)
+	@RequestMapping(value="/index",method=RequestMethod.POST)
 	public String addThread(@ModelAttribute("post") @Validated Post p, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.create(p);
-		m.addAttribute("threadId", p.getId());
-		ac.close();
-		return "result";
+		System.out.println(p.toString());
+		/*m.addAttribute("name", p.getName());
+		m.addAttribute("subject", p.getSubject());
+		m.addAttribute("comment", p.getComment());
+		m.addAttribute("image", p.getImage());
+		*/
+		m.addAttribute("listThreads", dao.loadAll());
+		return "index"; //was result
 	}
-	
-	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.GET)
+
+	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("op", dao.loadPost(threadId));
-		m.addAttribute("post", new Post());
+		m.addAttribute("command", new Post());
 		m.addAttribute("threadId", threadId);
 		m.addAttribute("listPosts", dao.loadThread(threadId));
-		ac.close();
 		return "thread";
 	}
 
-	@RequestMapping(value = "/thread/reply",method=RequestMethod.POST)
-	public String addPost(@ModelAttribute("post") @Validated Post p, Model m) {
+	@RequestMapping(value = "thread/{threadId}",method=RequestMethod.POST)
+	public String addPost(@ModelAttribute("command") Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		dao.create(p);
-		m.addAttribute("threadId", p.getParent());
-		ac.close();
-		return "result";
+		//dao.create(p);
+		System.out.println(p.toString());
+		return "thread";
 	}
 	
 	@RequestMapping(value = "thread/{threadId}/delete")
-	public String removePost(@ModelAttribute("post") @Validated Post p) {
+	public String removePost(@ModelAttribute("post") Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.delete(p);
-		ac.close();
-		return "result";
+		return "thread";
 	}
 
 }
