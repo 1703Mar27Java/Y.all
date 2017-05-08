@@ -4,8 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.*;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
@@ -13,8 +12,8 @@ import com.revature.dao.*;
 @Controller
 @RequestMapping("/board")
 public class PostController {
-	
-	@RequestMapping(value="/catalog",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -24,7 +23,7 @@ public class PostController {
 		return "catalog";
 	}
 
-	@RequestMapping(value="/catalog",method=RequestMethod.POST)
+	@RequestMapping(value = "/catalog", method = RequestMethod.POST)
 	public String addThread(@ModelAttribute("post") @Validated Post p, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -33,8 +32,8 @@ public class PostController {
 		ac.close();
 		return "result";
 	}
-	
-	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/thread/{threadId}", method = RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -46,7 +45,7 @@ public class PostController {
 		return "thread";
 	}
 
-	@RequestMapping(value = "/thread/reply",method=RequestMethod.POST)
+	@RequestMapping(value = "/thread/reply", method = RequestMethod.POST)
 	public String addPost(@ModelAttribute("post") @Validated Post p, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -55,7 +54,7 @@ public class PostController {
 		ac.close();
 		return "result";
 	}
-	
+
 	@RequestMapping(value = "thread/{threadId}/delete")
 	public String removePost(@ModelAttribute("post") @Validated Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");

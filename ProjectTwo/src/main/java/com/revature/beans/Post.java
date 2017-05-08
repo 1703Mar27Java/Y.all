@@ -2,12 +2,13 @@ package com.revature.beans;
 
 import java.io.*;
 import java.sql.*;
-import javax.persistence.*;
+import java.util.Base64;
 
+import javax.persistence.*;
 import org.springframework.beans.factory.*;
 import org.springframework.stereotype.Component;
 
-@Component(value="post")
+@Component(value = "post")
 @Entity
 @Table(name = "POST")
 public class Post implements InitializingBean, DisposableBean, Serializable {
@@ -18,7 +19,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	@SequenceGenerator(allocationSize = 1, name = "postSeq", sequenceName = "POST_SEQ")
 	@Column(name = "POST_ID")
 	private int id;
-	
+
 	@Column(name = "POST_FLAG")
 	private int flag;
 
@@ -71,7 +72,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -100,6 +101,18 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		return image;
 	}
 
+	public String getImageString() {
+		try {
+			if (image == null) {
+				return "";
+			} else {
+				return new String(Base64.getEncoder().encode(image), "UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
+
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
@@ -108,7 +121,8 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 		super();
 	}
 
-	public Post(int id, int flag, int parent, Timestamp time, String name, String subject, String comment, byte[] image) {
+	public Post(int id, int flag, int parent, Timestamp time, String name, String subject, String comment,
+			byte[] image) {
 		this();
 		this.id = id;
 		this.flag = flag;
@@ -129,13 +143,11 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	@Override
 	public void destroy() throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

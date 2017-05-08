@@ -30,6 +30,7 @@
 			</tr>
 		</table>
 	</form:form>
+
 	<table>
 		<tr>
 			<th>${op.getName()}</th>
