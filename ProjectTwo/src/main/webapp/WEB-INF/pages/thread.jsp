@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form:form method="POST" action="reply" modelAttribute="post">
-		<input name="parent" type="hidden" value="${threadId}"/>
+		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -25,26 +25,33 @@
 				<td><form:textarea path="comment" rows="3" cols="20" /></td>
 			</tr>
 			<tr>
+				<td colspan="2"><input type="file" name="image"></input></td>
+			</tr>
+			<tr>
 				<td colspan="2" align="center"><input type="submit"
 					value="Post" /></td>
 			</tr>
 		</table>
 	</form:form>
 
-	<table>
+	<table border="1px solid black">
 		<tr>
-			<th>${op.getName()}</th>
-			<th>${op.getSubject()}</th>
-			<th>${op.getComment()}</th>
+			<td rowspan="2"><img src="data:image/jpg;base64, ${op.getImageString()}" ></td>
+			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
 		</tr>
+	</table>
 
-		<c:forEach var="row" items="${listPosts}">
+	<c:forEach var="row" items="${listPosts}">
+		<table border="1px solid black">
 			<tr>
-				<td><c:out value="${row.getName()}" /></td>
-				<td><c:out value="${row.getSubject()}" /></td>
+				<td rowspan="2"><img src="data:image/jpg;base64, ${row.getImageString()}" ></td>
+				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
+			</tr>
+			<tr>
 				<td><c:out value="${row.getComment()}" /></td>
 			</tr>
-		</c:forEach>
-	</table>
+		</table>
+	</c:forEach>
+	<p><a href="/ProjectTwo/board/catalog">Return to Catalog</a></p>
 </body>
 </html>
