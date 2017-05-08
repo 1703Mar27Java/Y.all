@@ -6,9 +6,18 @@
 <html>
 <head>
 <title>Catalog</title>
+<<<<<<< HEAD
 </head>
 <body>
 	<form:form method="POST" action="catalog" modelAttribute="post" enctype="multipart/form-data">
+=======
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<h4 style="color:red;float:right;margin=0px">${moderator.getUsername()}</h4>
+<h3>Start New Thread</h3>	
+	<form:form method="POST" action="catalog" modelAttribute="post">
+>>>>>>> Dev
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -34,8 +43,14 @@
 	<c:forEach var="row" items="${listThreads}">
 		<table border="1px solid black">
 			<tr>
+<<<<<<< HEAD
 				<td rowspan="2"><c:out value="${row.getImage()}" /></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /><a
+=======
+				<td rowspan="2"><c:out value="${row.getImageString()}" /></td>
+				<td><c:out
+						value="${row.getName()} ${row.getSubject()}" /><a
+>>>>>>> Dev
 					href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a></td>
 			</tr>
 			<tr>
