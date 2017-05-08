@@ -9,7 +9,7 @@
 <title>Index</title>
 </head>
 <body>
-	<form:form method="POST" action="index" modelAttribute="post">
+	<form:form method="POST" action="catalog" modelAttribute="post">
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><form:input path="comment" /></td>
+				<td><form:textarea path="comment" rows="3" cols="20" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

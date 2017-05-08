@@ -9,7 +9,8 @@
 <title>Thread</title>
 </head>
 <body>
-	<form:form method="POST" action="thread/${threadId}" modelAttribute="post">
+	<form:form method="POST" action="reply" modelAttribute="post">
+		<input name="parent" type="hidden" value="${threadId}"/>
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -21,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><form:input path="comment" /></td>
+				<td><form:textarea path="comment" rows="3" cols="20" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
@@ -31,9 +32,9 @@
 	</form:form>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>Subject</th>
-			<th>Comment</th>
+			<th>${op.getName()}</th>
+			<th>${op.getSubject()}</th>
+			<th>${op.getComment()}</th>
 		</tr>
 
 		<c:forEach var="row" items="${listPosts}">

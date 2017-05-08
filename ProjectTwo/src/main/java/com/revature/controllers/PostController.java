@@ -14,38 +14,46 @@ import com.revature.dao.*;
 @RequestMapping("/board")
 public class PostController {
 	
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(value="/catalog",method=RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		m.addAttribute("listThreads", dao.loadThread(0));
 		m.addAttribute("post", new Post());
-		return "index";
+		ac.close();
+		return "catalog";
 	}
 
-	@RequestMapping(value="/index",method=RequestMethod.POST)
+	@RequestMapping(value="/catalog",method=RequestMethod.POST)
 	public String addThread(@ModelAttribute("post") @Validated Post p, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.create(p);
-		return "thread/" + p.getId();
+		m.addAttribute("threadId", p.getId());
+		ac.close();
+		return "result";
 	}
 	
 	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
+		m.addAttribute("op", dao.loadPost(threadId));
 		m.addAttribute("post", new Post());
+		m.addAttribute("threadId", threadId);
 		m.addAttribute("listPosts", dao.loadThread(threadId));
+		ac.close();
 		return "thread";
 	}
 
-	@RequestMapping(value = "/thread/{threadId}",method=RequestMethod.POST)
-	public String addPost(@ModelAttribute("post") @Validated Post p) {
+	@RequestMapping(value = "/thread/reply",method=RequestMethod.POST)
+	public String addPost(@ModelAttribute("post") @Validated Post p, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.create(p);
-		return "thread";
+		m.addAttribute("threadId", p.getParent());
+		ac.close();
+		return "result";
 	}
 	
 	@RequestMapping(value = "thread/{threadId}/delete")
@@ -53,7 +61,8 @@ public class PostController {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		dao.delete(p);
-		return "thread";
+		ac.close();
+		return "result";
 	}
 
 }

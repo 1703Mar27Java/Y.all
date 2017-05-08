@@ -33,7 +33,7 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public Post loadPost(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Post p = (Post) session.load(Post.class, new Integer(id));
+		Post p = (Post) session.get(Post.class, new Integer(id));
 		return p;
 	}
 	
