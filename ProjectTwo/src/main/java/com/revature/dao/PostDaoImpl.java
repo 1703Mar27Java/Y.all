@@ -1,10 +1,6 @@
 package com.revature.dao;
 
 import java.sql.Timestamp;
-<<<<<<< HEAD
-import java.text.SimpleDateFormat;
-=======
->>>>>>> Dev
 import java.util.*;
 
 import org.hibernate.*;
