@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "MODERATOR")
 public class Moderator implements InitializingBean, DisposableBean, Serializable {
-	
 	private static final long serialVersionUID = 5499348097731219585L;
 
 	@Id

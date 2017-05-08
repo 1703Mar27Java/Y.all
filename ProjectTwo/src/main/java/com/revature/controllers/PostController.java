@@ -4,6 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.context.support.*;
 
 import com.revature.beans.*;
@@ -12,6 +13,15 @@ import com.revature.dao.*;
 @Controller
 @RequestMapping("/board")
 public class PostController {
+	
+	@RequestMapping(value="/index",method=RequestMethod.GET)
+	public String welcomePage(Model m) {
+		return "index";
+	}
+	@RequestMapping(value="/modLogin",method=RequestMethod.GET)
+	public String redirectToMod(Model m) {
+		return "redirect:/moderator/modLogin";
+	}
 
 	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
 	public String getThreads(Model m) {

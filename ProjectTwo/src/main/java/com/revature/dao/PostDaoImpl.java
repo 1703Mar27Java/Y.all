@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 import org.hibernate.*;
@@ -19,6 +20,7 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public void create(Post p) {
 		Session session = this.sessionFactory.getCurrentSession();
+		p.setTime(new Timestamp(System.currentTimeMillis()));
 		session.save(p);
 	}
 

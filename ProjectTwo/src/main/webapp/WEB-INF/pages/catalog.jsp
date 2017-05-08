@@ -9,7 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-<h3>Start New Thread</h3>		
+<h4 style="color:red;float:right;margin=0px">${moderator.getUsername()}</h4>
+<h3>Start New Thread</h3>	
 	<form:form method="POST" action="catalog" modelAttribute="post">
 		<table>
 			<tr>
