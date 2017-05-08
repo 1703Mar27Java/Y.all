@@ -42,10 +42,11 @@
 	</bean>
 
 	<!-- dao -->
-	<bean id="myDao" class="com.revature.dao.PostDaoImpl">
-		<property name="sessionFactory" ref="mySessionFactory"></property>
-	</bean>
 	<bean id="myModDao" class="com.revature.dao.ModDaoImpl">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
+	<bean id="myDao" class="com.revature.dao.PostDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+	</bean>
+	
 </beans>

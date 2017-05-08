@@ -11,6 +11,10 @@ import com.revature.beans.Moderator;
 public class ModDaoImpl implements ModDao{
 	private SessionFactory sessionFactory;
 	
+	public void setSessionFactory(SessionFactory sf) {
+		this.sessionFactory = sf;
+	}
+	
 	@Override
 	public void persistMod(Moderator m) {
 		Session s = sessionFactory.getCurrentSession();

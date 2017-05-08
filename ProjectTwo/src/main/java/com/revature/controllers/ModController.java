@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,7 @@ public class ModController {
 	
 	@RequestMapping(value="/modLogin",method=RequestMethod.GET)
 	public String modLogin(Model m) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		ModDao dao = (ModDao) ac.getBean("myModDao");
-		return "modlogin";
+		return "modLogin";
 	}
 	
 	@RequestMapping(value="/modLogin", method=RequestMethod.POST)
@@ -30,6 +30,6 @@ public class ModController {
 		ModDao dao = (ModDao) ac.getBean("myModDao");
 		Moderator mod = dao.getModByLogin(username, password);
 		m.addAttribute("mod", mod);
-		return "index";
+		return "catalog";
 	}
 }

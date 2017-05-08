@@ -12,7 +12,9 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 
+@Component(value = "moderator")
 @Entity
 @Table(name = "MODERATOR")
 public class Moderator implements InitializingBean, DisposableBean, Serializable {
