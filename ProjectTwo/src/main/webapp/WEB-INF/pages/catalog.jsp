@@ -44,7 +44,7 @@
 	<c:forEach var="row" items="${listThreads}">
 	<div class="col-md-4 portfolio-item">
 				<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
-				<img src="/ProjectTwo/board/img/${row.getId()}" style="width:200px;"/></a>
+				<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a>
 				<h3><c:out value="${row.getName()} ${row.getSubject()}" /></h3>
 				<a href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a>
 				<p><c:out value="${row.getComment()}" /></p>

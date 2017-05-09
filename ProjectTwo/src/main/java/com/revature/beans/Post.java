@@ -41,6 +41,9 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 
 	@Column(name = "POST_IMAGE")
 	private byte[] image;
+	
+	@Column(name = "POST_THUMBNAIL")
+	private byte[] thumb;
 
 	public int getId() {
 		return id;
@@ -116,6 +119,14 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public byte[] getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(byte[] thumb) {
+		this.thumb = thumb;
 	}
 
 	public Post() {

@@ -37,7 +37,8 @@
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><img src="/ProjectTwo/board/img/${op.getId()}" /></td>
+			<td rowspan="2"><a target="_blank" href="/ProjectTwo/board/img/${op.getId()}">
+				<img src="/ProjectTwo/board/thmb/${op.getId()}" /></a></td>
 			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
 		</tr>
 		<tr>
@@ -48,7 +49,8 @@
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><img src="/ProjectTwo/board/img/${row.getId()}" /></td>
+				<td rowspan="2"><a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
+				<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
 			</tr>
 			<tr>
