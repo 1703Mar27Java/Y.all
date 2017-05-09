@@ -46,7 +46,7 @@ public class PostController {
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		Post p = (Post) ac.getBean("post");
 		p.setName(name);
-		p.setSubject(name);
+		p.setSubject(subject);
 		p.setComment(comment);
 		if (!file.isEmpty()) {
 			try {
@@ -80,7 +80,7 @@ public class PostController {
 		Post p = (Post) ac.getBean("post");
 		p.setParent(parent);
 		p.setName(name);
-		p.setSubject(name);
+		p.setSubject(subject);
 		p.setComment(comment);
 		if (!file.isEmpty()) {
 			try {
