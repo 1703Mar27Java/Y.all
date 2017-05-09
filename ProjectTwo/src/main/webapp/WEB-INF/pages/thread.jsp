@@ -36,15 +36,18 @@
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><img src="data:image/jpg;base64, ${op.getImageString()}" ></td>
+			<td rowspan="2"><img src="data:image/jpg;base64,${op.getImageString()}" ></td>
 			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
+		</tr>
+		<tr>
+			<td>${op.getComment()}</td>
 		</tr>
 	</table>
 
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><img src="data:image/jpg;base64, ${row.getImageString()}" ></td>
+				<td rowspan="2"><img src="data:image/jpg;base64,${row.getImageString()}" ></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
 			</tr>
 			<tr>
