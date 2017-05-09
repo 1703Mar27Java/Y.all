@@ -4,8 +4,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.IOException;
+
 import org.springframework.context.support.*;
+import org.springframework.http.*;
 
 import com.revature.beans.*;
 import com.revature.dao.*;
@@ -34,9 +39,17 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/catalog", method = RequestMethod.POST)
-	public String addThread(@ModelAttribute("post") @Validated Post p, Model m) {
+	public String addThread(@ModelAttribute("post") @Validated Post p, @RequestParam("image") MultipartFile file, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
+		if (!file.isEmpty()) {			
+            try {
+				p.setImage(file.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}            
+		}
 		dao.create(p);
 		m.addAttribute("threadId", p.getId());
 		ac.close();
@@ -72,6 +85,19 @@ public class PostController {
 		dao.delete(p);
 		ac.close();
 		return "result";
+	}
+	
+	@RequestMapping(value = "/board/img/${row.getId()}", method = RequestMethod.GET,
+	        produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> ListImage(@PathVariable int threadId) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+	    Post p = dao.loadPost(threadId);
+	    byte [] image = p.getImage();
+	    final HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.IMAGE_JPEG);
+		ac.close();
+	    return new ResponseEntity<byte[]>(image, headers, HttpStatus.CREATED);
 	}
 
 }

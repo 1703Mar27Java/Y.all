@@ -11,7 +11,7 @@
 		<body>
 			<h4 style="color: red; float: right;margin=0px">${moderator.getUsername()}</h4>
 			<h3>Start New Thread</h3>
-			<form:form method="POST" action="catalog" modelAttribute="post">
+			<form:form method="POST" action="catalog" modelAttribute="post" enctype="multipart/form-data">
 		<table>
 					<tr>
 						<td>Name:</td>
@@ -37,7 +37,7 @@
 			<c:forEach var="row" items="${listThreads}">
 				<table border="1px solid black">
 					<tr>
-						<td rowspan="2"><c:out value="${row.getImageString()}" /></td>
+						<td rowspan="2"><img src="/board/img/${row.getId()}" /></td>
 						<td><c:out value="${row.getName()} ${row.getSubject()}" /><a
 							href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a></td>
 					</tr>
