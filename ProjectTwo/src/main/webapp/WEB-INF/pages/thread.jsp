@@ -9,34 +9,35 @@
 <title>Thread</title>
 </head>
 <body>
-	<form:form method="POST" action="reply" modelAttribute="post">
+	<form method="POST" action="reply" modelAttribute="post"
+		enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td><form:input path="name" /></td>
+				<td><input type="text" name="name" /></td>
 			</tr>
 			<tr>
 				<td>Subject:</td>
-				<td><form:input path="subject" /></td>
+				<td><input type="text" name="subject" /></td>
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><form:textarea path="comment" rows="3" cols="20" /></td>
+				<td><textarea type="text" name="comment" rows="3" cols="20"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="file" name="image"></input></td>
+				<td colspan="2"><input type="file" name="file" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
 					value="Post" /></td>
 			</tr>
 		</table>
-	</form:form>
+	</form>
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><img src="data:image/jpg;base64,${op.getImageString()}" ></td>
+			<td rowspan="2"><img src="/ProjectTwo/board/img/${op.getId()}" /></td>
 			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
 		</tr>
 		<tr>
@@ -47,7 +48,7 @@
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><img src="data:image/jpg;base64,${row.getImageString()}" ></td>
+				<td rowspan="2"><img src="/ProjectTwo/board/img/${row.getId()}" /></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
 			</tr>
 			<tr>
@@ -55,6 +56,8 @@
 			</tr>
 		</table>
 	</c:forEach>
-	<p><a href="/ProjectTwo/board/catalog">Return to Catalog</a></p>
+	<p>
+		<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
+	</p>
 </body>
 </html>
