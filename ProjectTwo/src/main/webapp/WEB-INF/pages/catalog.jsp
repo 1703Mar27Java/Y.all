@@ -11,8 +11,7 @@
 <body>
 	<h4 style="color: red; float: right;margin=0px">${moderator.getUsername()}</h4>
 	<h3>Start New Thread</h3>
-	<form method="POST" action="catalog" modelAttribute="post"
-		enctype="multipart/form-data">
+	<form method="POST" action="catalog" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -24,7 +23,7 @@
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><textarea type="text" name="comment" rows="3" cols="20"></textarea></td>
+				<td><textarea name="comment" rows="3" cols="20"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="file" name="file" /></td>
@@ -39,7 +38,7 @@
 	<c:forEach var="row" items="${listThreads}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><img src="/board/img/${row.getId()}" /></td>
+				<td rowspan="2"><img src="/ProjectTwo/board/img/${row.getId()}" /></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /><a
 					href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a></td>
 			</tr>

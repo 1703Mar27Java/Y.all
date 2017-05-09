@@ -37,7 +37,7 @@
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><img src="/board/img/${op.getId()}" /></td>
+			<td rowspan="2"><img src="/ProjectTwo/board/img/${op.getId()}" /></td>
 			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
 		</tr>
 	</table>
@@ -45,7 +45,7 @@
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><img src="/board/img/${row.getId()}" /></td>
+				<td rowspan="2"><img src="/ProjectTwo/board/img/${row.getId()}" /></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
 			</tr>
 			<tr>

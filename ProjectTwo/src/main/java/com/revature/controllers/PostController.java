@@ -94,7 +94,7 @@ public class PostController {
 		return "result";
 	}
 
-	@RequestMapping(value = "thread/{threadId}/delete")
+	@RequestMapping(value = "/thread/{threadId}/delete")
 	public String removePost(@ModelAttribute("post") @Validated Post p) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
@@ -103,11 +103,11 @@ public class PostController {
 		return "result";
 	}
 
-	@RequestMapping(value="/board/img/${row.getId()}", method=RequestMethod.GET, produces=MediaType.IMAGE_JPEG_VALUE)
-	public ResponseEntity<byte[]> ListImage(@PathVariable int threadId) {
+	@RequestMapping(value = "/img/{postId}", method=RequestMethod.GET, produces=MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> ListImage(@PathVariable int postId) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		Post p = dao.loadPost(threadId);
+		Post p = dao.loadPost(postId);
 		byte[] image = p.getImage();
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
