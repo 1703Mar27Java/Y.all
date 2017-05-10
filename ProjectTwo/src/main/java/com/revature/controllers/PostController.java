@@ -77,6 +77,16 @@ public class PostController {
 		return "result";
 	}
 
+	@RequestMapping(value = "/thread/0", method = RequestMethod.GET)
+	public String getThread(Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		m.addAttribute("listThreads", dao.loadThread(0));
+		m.addAttribute("post", new Post());
+		ac.close();
+		return "catalog";
+	}
+
 	@RequestMapping(value = "/thread/{threadId}", method = RequestMethod.GET)
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
@@ -115,6 +125,19 @@ public class PostController {
 		}
 		
 		dao.create(p);
+		m.addAttribute("threadId", p.getParent());
+		ac.close();
+		return "result";
+	}
+
+	@RequestMapping(value = "/thread/flagPost")
+	public String flagPost(@RequestParam("postId") int postId, Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		Post p = (Post) ac.getBean("post");
+		p = dao.loadPost(postId);
+		p.setFlag(1);
+		dao.update(p);
 		m.addAttribute("threadId", p.getParent());
 		ac.close();
 		return "result";
