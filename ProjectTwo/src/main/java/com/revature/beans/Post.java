@@ -79,7 +79,7 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 	}
 	
 	public String getTimeFormatted() {
-		return new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a").format(time);
+		return new SimpleDateFormat("EEEE, MMM d, h:mm:ss a").format(time);
 	}
 
 	public String getName() {

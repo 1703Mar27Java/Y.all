@@ -67,9 +67,9 @@ form {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td rowspan="2" colspan="4">${op.getComment()}</td>
+			<td rowspan="2" colspan="5">${op.getComment()}</td>
 		</tr>
+		<tr></tr>
 	</table>
 
 	<c:forEach var="row" items="${listPosts}">
@@ -92,9 +92,9 @@ form {
 				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td rowspan="2" colspan="4"><c:out value="${row.getComment()}" /></td>
+				<td rowspan="2" colspan="5"><c:out value="${row.getComment()}" /></td>
 			</tr>
+			<tr></tr>
 		</table>
 	</c:forEach>
 </body>
