@@ -50,6 +50,9 @@ public class Moderator implements InitializingBean, DisposableBean, Serializable
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public boolean exists(){
+		return (this.username != null) ? true: false; 
+	}
 	@Override
 	public void destroy() throws Exception {
 		// TODO Auto-generated method stub

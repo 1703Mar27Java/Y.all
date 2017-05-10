@@ -6,6 +6,8 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -31,11 +33,25 @@ public class PostController {
 	public String welcomePage(Model m) {
 		return "index";
 	}
-
-	@RequestMapping(value = "/modLogin", method = RequestMethod.GET)
-	public String redirectToMod(Model m) {
-		return "redirect:/moderator/modLogin";
+	@RequestMapping(value="/modLogin",method=RequestMethod.GET)
+	public String modLogin(Model m) {
+		return "modlogin";
 	}
+	@RequestMapping(value="/modLogin", method=RequestMethod.POST)
+	public String modLogin(@RequestParam(value="username") String username,
+						   @RequestParam(value="password") String password,
+						   Model m){
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		ModDao modDao = (ModDao) ac.getBean("myModDao");
+		PostDao postDao = (PostDao) ac.getBean("myDao");
+		Moderator mod = modDao.getModByLogin(username, password);
+		m.addAttribute("moderator", mod);
+		m.addAttribute("listThreads", postDao.loadThread(0));
+		m.addAttribute("post", new Post());
+		ac.close();
+		return "catalog";
+	}
+	
 
 	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
 	public String getThreads(Model m) {

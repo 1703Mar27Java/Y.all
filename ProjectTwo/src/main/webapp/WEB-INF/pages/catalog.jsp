@@ -11,12 +11,16 @@
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/3-col-portfolio.css">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
 </head>
 <body>
-	<h4 style="color: red; float: right;margin=0px">${moderator.getUsername()}</h4>
-	<div class="container">
-	<h3>Start New Thread</h3>
+
+	<c:if test="${moderator.exists()}">
+		<h4 style="color: red;text-align:center;">${moderator.getUsername()}</h4>
+	</c:if>
+	
 	<form method="POST" action="catalog" enctype="multipart/form-data">
+		<h3>Start New Thread</h3>
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -39,18 +43,23 @@
 			</tr>
 		</table>
 	</form>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<c:forEach var="row" items="${listThreads}">
+				<div class="col-md-4 portfolio-item" style="max-height:375px; max-width:350px;overflow:hidden;">
+				<center>
+					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
+					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
+					<a href="/ProjectTwo/board/thread/${row.getId()}" class="button">Reply</a>
+					<h3><c:out value="${row.getSubject()}" /></h3>
+					<p><c:out value="${row.getComment()}" /></p>
+				</center>
+				</div>
+			</c:forEach>
+		</div>
+		
+	</div>
 
-	<div class="row">
-	<c:forEach var="row" items="${listThreads}">
-	<div class="col-md-4 portfolio-item">
-				<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
-				<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a>
-				<h3><c:out value="${row.getName()} ${row.getSubject()}" /></h3>
-				<a href="/ProjectTwo/board/thread/${row.getId()}"> Reply </a>
-				<p><c:out value="${row.getComment()}" /></p>
-	</div>
-	</c:forEach>
-	</div>
-	</div>
 </body>
 </html>

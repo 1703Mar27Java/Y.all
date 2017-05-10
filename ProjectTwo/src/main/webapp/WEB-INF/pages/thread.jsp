@@ -5,8 +5,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Thread</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet"
+	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/3-col-portfolio.css">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
+
+<style>
+form{
+	float:none;
+	margin-left:30px;
+}
+</style>
 </head>
 <body>
 	<form method="POST" action="reply" modelAttribute="post"
@@ -34,6 +46,7 @@
 			</tr>
 		</table>
 	</form>
+	<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
 
 	<table border="1px solid black">
 		<tr>
@@ -58,8 +71,5 @@
 			</tr>
 		</table>
 	</c:forEach>
-	<p>
-		<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
-	</p>
 </body>
 </html>
