@@ -51,6 +51,19 @@ public class PostController {
 		ac.close();
 		return "catalog";
 	}
+	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
+	public String flaggedThreads(Model m){
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		if(m.containsAttribute("moderator")){	//if statement is to stop users from typing url
+			PostDao postDao = (PostDao) ac.getBean("myDao");
+			m.addAttribute("flaggedPosts", postDao.loadFlags());
+		}else{
+			ac.close();
+			return "catalog";
+		}
+		ac.close();
+		return "modflags";
+	}
 	
 
 	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
@@ -89,6 +102,7 @@ public class PostController {
 		
 		dao.create(p);
 		m.addAttribute("threadId", p.getId());
+		m.addAttribute("message", "Post Successful!");
 		ac.close();
 		return "result";
 	}

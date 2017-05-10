@@ -14,9 +14,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
 </head>
 <body>
-
+<div class="container-fluid">
 	<c:if test="${moderator.exists()}">
 		<h4 style="color: red;text-align:center;">${moderator.getUsername()}</h4>
+		<a href="modFlags" class="button">Flags</a>
 	</c:if>
 	
 	<form method="POST" action="catalog" enctype="multipart/form-data">
@@ -44,10 +45,10 @@
 		</table>
 	</form>
 	
-	<div class="container-fluid">
+	
 		<div class="row">
 			<c:forEach var="row" items="${listThreads}">
-				<div class="col-md-4 portfolio-item" style="max-height:375px; max-width:350px;overflow:hidden;">
+				<div class="col-md-4 portfolio-item" style="max-height:375px; max-width:300px;overflow:hidden;float:left;">
 				<center>
 					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>

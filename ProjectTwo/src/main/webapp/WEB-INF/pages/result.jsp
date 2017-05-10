@@ -7,7 +7,7 @@
 <title>Submitted Info</title>
 </head>
 <body>
-	<h1>Post Successful!</h1>
+	<h1>${message}</h1>
 	<p><a href="/ProjectTwo/board/thread/${threadId}">Continue to Thread</a></p>
 </body>
 </html>
