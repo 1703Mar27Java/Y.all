@@ -19,7 +19,7 @@
 		<h4 style="color: red;text-align:center;">${moderator.getUsername()}</h4>
 	</c:if>
 	
-	<form method="POST" action="catalog" enctype="multipart/form-data">
+	<form method="POST" action="post" enctype="multipart/form-data">
 		<h3>Start New Thread</h3>
 		<table>
 			<tr>

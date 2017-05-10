@@ -12,7 +12,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
-import static org.imgscalr.Scalr.*;
 import org.springframework.context.support.*;
 import org.springframework.http.*;
 
@@ -57,7 +56,7 @@ public class PostController {
 		return "catalog";
 	}
 
-	@RequestMapping(value = "/catalog", method = RequestMethod.POST, headers=("content-type=multipart/*"))
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public String addThread(@RequestParam("name") String name, @RequestParam("subject") String subject,
 			@RequestParam("comment") String comment, @RequestParam("file") MultipartFile file, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
@@ -214,7 +213,7 @@ public class PostController {
 			outputImage = Scalr.resize(outputImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH, resultWidth);
 		}
 
-		int paddingSize = 0;
+		/*int paddingSize = 0;
 		if (outputImage.getWidth() != resultWidth) {
 			paddingSize = (resultWidth - outputImage.getWidth()) / 2;
 		} else if (outputImage.getHeight() != resultHeight) {
@@ -240,7 +239,7 @@ public class PostController {
 			if (width > 0 && height > 0) {
 				outputImage = Scalr.crop(outputImage, x, y, width, height);
 			}
-		}
+		}*/
 
 		inputImage.flush();
 		outputImage.flush();
