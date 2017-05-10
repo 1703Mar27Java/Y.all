@@ -19,7 +19,8 @@
 				<center>
 					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
-					<a href="/ProjectTwo/board/thread/${row.getId()}/delete" class="button">Delete</a>
+					<a id="delete" href="/ProjectTwo/board/thread/${row.getId()}/delete" class="button">Delete</a>
+					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/ignore" class="button">Ignore</a>
 					<h3><c:out value="${row.getSubject()}" /></h3>
 					<p><c:out value="${row.getComment()}" /></p>
 				</center>
@@ -27,4 +28,9 @@
 			</c:forEach>
 	</div>
 </body>
+<script>
+	$(document).ready({
+		
+	})
+</script>
 </html>

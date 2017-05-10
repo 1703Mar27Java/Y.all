@@ -47,7 +47,7 @@ public class PostController {
 	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
 	public String flaggedThreads(Model m){
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		if(m.containsAttribute("moderator")){	//if statement is to stop users from typing url
+		if(true/*m.containsAttribute("moderator")*/){	//if statement is to stop users from typing url
 			PostDao postDao = (PostDao) ac.getBean("myDao");
 			m.addAttribute("flaggedPosts", postDao.loadFlags());
 		}else{
@@ -161,6 +161,18 @@ public class PostController {
 		Post p = (Post) ac.getBean("post");
 		p = dao.loadPost(postId);
 		p.setFlag(1);
+		dao.update(p);
+		m.addAttribute("threadId", p.getParent());
+		ac.close();
+		return "result";
+	}
+	@RequestMapping(value = "/thread/unflagPost")
+	public String ignoreFlag(@RequestParam("postId") int postId, Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		Post p = (Post) ac.getBean("post");
+		p = dao.loadPost(postId);
+		p.setFlag(0);
 		dao.update(p);
 		m.addAttribute("threadId", p.getParent());
 		ac.close();

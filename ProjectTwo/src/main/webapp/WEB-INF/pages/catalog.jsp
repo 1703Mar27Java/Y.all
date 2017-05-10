@@ -45,22 +45,20 @@
 		</table>
 	</form>
 	
-	
-		<div class="row">
+	<div class="row">
 			<c:forEach var="row" items="${listThreads}">
-				<div class="col-md-4 portfolio-item" style="max-height:375px; max-width:300px;overflow:hidden;float:left;">
+				<div class="col-md-3 portfolio-item" style="max-height:325px; max-width:300px;overflow:hidden;float:left;">
 				<center>
 					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
 					<a href="/ProjectTwo/board/thread/${row.getId()}" class="button">Reply</a>
-					<h3><c:out value="${row.getSubject()}" /></h3>
-					<p><c:out value="${row.getComment()}" /></p>
+					
+					<p><h3><c:out value="${row.getSubject()}" /></h3>
+					<c:out value="${row.getComment()}" /></p>
 				</center>
 				</div>
 			</c:forEach>
-		</div>
-		
 	</div>
-
+</div>
 </body>
 </html>
