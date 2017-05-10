@@ -34,7 +34,7 @@ form{
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><textarea type="text" name="comment" rows="3" cols="20"></textarea></td>
+				<td><textarea name="comment" rows="3" cols="20"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="file" name="file" /></td>

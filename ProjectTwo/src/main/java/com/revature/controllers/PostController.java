@@ -5,20 +5,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
+import static org.imgscalr.Scalr.*;
 import org.springframework.context.support.*;
 import org.springframework.http.*;
 
@@ -132,8 +126,9 @@ public class PostController {
 				BufferedImage inputImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 				BufferedImage thumbnail = resizeImage(inputImage, 150, 150);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write( thumbnail, "jpg", baos );
+				ImageIO.write(thumbnail, "jpg", baos);
 				baos.flush();
+				p.setImage(file.getBytes());
 				p.setThumb(baos.toByteArray());
 				baos.close();
 			} catch (IOException e) {
