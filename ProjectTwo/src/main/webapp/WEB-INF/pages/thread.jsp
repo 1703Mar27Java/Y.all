@@ -11,12 +11,13 @@
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/3-col-portfolio.css">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/imageboard.css" />">
 
 <style>
-form{
-	float:none;
-	margin-left:30px;
+form {
+	float: none;
+	margin-left: 30px;
 }
 </style>
 </head>
@@ -49,35 +50,51 @@ form{
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><a target="_blank"
-				href="/ProjectTwo/board/img/${op.getId()}"> <img
-					src="/ProjectTwo/board/thmb/${op.getId()}" /></a></td>
-			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
+			<td rowspan="3"><c:if test="${op.getImage() != null}">
+					<a target="_blank" href="/ProjectTwo/board/img/${op.getId()}">
+						<img src="/ProjectTwo/board/thmb/${op.getId()}" />
+					</a>
+				</c:if></td>
+			<td><c:out value="${op.getId()}" /></td>
+			<td><c:out value="${op.getName()}" /></td>
+			<td><c:out value="${op.getSubject()}" /></td>
+			<td><c:out value="${op.getTimeFormatted()}" /></td>
+			<td>
+				<form method="POST" action="flagPost">
+					<input name="postId" type="hidden" value="${op.getId()}" /> <input
+						type="submit" value="Flag" />
+				</form>
+			</td>
 		</tr>
 		<tr>
-			<td>${op.getComment()}</td>
-			<td><form method="POST" action="flagPost">
-					<input name="postId" type="hidden" value="${op.getId()}" />
-					<input type="submit" value="Flag" />
-				</form></td>
+			<td rowspan="2" colspan="5">${op.getComment()}</td>
 		</tr>
+		<tr></tr>
 	</table>
 
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><a target="_blank"
-					href="/ProjectTwo/board/img/${row.getId()}"> <img
-						src="/ProjectTwo/board/thmb/${row.getId()}" /></a></td>
-				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
+				<td rowspan="3"><c:if test="${row.getImage() != null}">
+						<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
+							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
+						</a>
+					</c:if></td>
+				<td><c:out value="${row.getId()}" /></td>
+				<td><c:out value="${row.getName()}" /></td>
+				<td><c:out value="${row.getSubject()}" /></td>
+				<td><c:out value="${row.getTimeFormatted()}" /></td>
+				<td>
+					<form method="POST" action="flagPost">
+						<input name="postId" type="hidden" value="${row.getId()}" /> <input
+							type="submit" value="Flag" />
+					</form>
+				</td>
 			</tr>
 			<tr>
-				<td><c:out value="${row.getComment()}" /></td>
-			<td><form method="POST" action="flagPost">
-					<input name="postId" type="hidden" value="${row.getId()}" />
-					<input type="submit" value="Flag" />
-				</form></td>
+				<td rowspan="2" colspan="5"><c:out value="${row.getComment()}" /></td>
 			</tr>
+			<tr></tr>
 		</table>
 	</c:forEach>
 </body>

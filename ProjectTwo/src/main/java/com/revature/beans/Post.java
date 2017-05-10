@@ -2,6 +2,7 @@ package com.revature.beans;
 
 import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 
 import javax.persistence.*;
@@ -75,6 +76,10 @@ public class Post implements InitializingBean, DisposableBean, Serializable {
 
 	public void setTime(Timestamp time) {
 		this.time = time;
+	}
+	
+	public String getTimeFormatted() {
+		return new SimpleDateFormat("EEEE, MMM d, h:mm:ss a").format(time);
 	}
 
 	public String getName() {
