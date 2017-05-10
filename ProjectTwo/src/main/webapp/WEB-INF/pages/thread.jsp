@@ -21,8 +21,7 @@ form{
 </style>
 </head>
 <body>
-	<form method="POST" action="reply" modelAttribute="post"
-		enctype="multipart/form-data">
+	<form method="POST" action="reply" enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
@@ -50,24 +49,34 @@ form{
 
 	<table border="1px solid black">
 		<tr>
-			<td rowspan="2"><a target="_blank" href="/ProjectTwo/board/img/${op.getId()}">
-				<img src="/ProjectTwo/board/thmb/${op.getId()}" /></a></td>
+			<td rowspan="2"><a target="_blank"
+				href="/ProjectTwo/board/img/${op.getId()}"> <img
+					src="/ProjectTwo/board/thmb/${op.getId()}" /></a></td>
 			<td><c:out value="${op.getName()} ${op.getSubject()}" /></td>
 		</tr>
 		<tr>
 			<td>${op.getComment()}</td>
+			<td><form method="POST" action="flagPost">
+					<input name="postId" type="hidden" value="${op.getId()}" />
+					<input type="submit" value="Flag" />
+				</form></td>
 		</tr>
 	</table>
 
 	<c:forEach var="row" items="${listPosts}">
 		<table border="1px solid black">
 			<tr>
-				<td rowspan="2"><a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
-				<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a></td>
+				<td rowspan="2"><a target="_blank"
+					href="/ProjectTwo/board/img/${row.getId()}"> <img
+						src="/ProjectTwo/board/thmb/${row.getId()}" /></a></td>
 				<td><c:out value="${row.getName()} ${row.getSubject()}" /></td>
 			</tr>
 			<tr>
 				<td><c:out value="${row.getComment()}" /></td>
+			<td><form method="POST" action="flagPost">
+					<input name="postId" type="hidden" value="${row.getId()}" />
+					<input type="submit" value="Flag" />
+				</form></td>
 			</tr>
 		</table>
 	</c:forEach>
