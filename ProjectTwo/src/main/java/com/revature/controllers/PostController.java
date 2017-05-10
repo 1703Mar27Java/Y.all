@@ -5,16 +5,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import javax.imageio.ImageIO;
 
@@ -76,7 +69,7 @@ public class PostController {
 		return "catalog";
 	}
 
-	@RequestMapping(value = "/catalog", method = RequestMethod.POST, headers=("content-type=multipart/*"))
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public String addThread(@RequestParam("name") String name, @RequestParam("subject") String subject,
 			@RequestParam("comment") String comment, @RequestParam("file") MultipartFile file, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
@@ -146,8 +139,9 @@ public class PostController {
 				BufferedImage inputImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 				BufferedImage thumbnail = resizeImage(inputImage, 150, 150);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write( thumbnail, "jpg", baos );
+				ImageIO.write(thumbnail, "jpg", baos);
 				baos.flush();
+				p.setImage(file.getBytes());
 				p.setThumb(baos.toByteArray());
 				baos.close();
 			} catch (IOException e) {
@@ -233,7 +227,7 @@ public class PostController {
 			outputImage = Scalr.resize(outputImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH, resultWidth);
 		}
 
-		int paddingSize = 0;
+		/*int paddingSize = 0;
 		if (outputImage.getWidth() != resultWidth) {
 			paddingSize = (resultWidth - outputImage.getWidth()) / 2;
 		} else if (outputImage.getHeight() != resultHeight) {
@@ -259,7 +253,7 @@ public class PostController {
 			if (width > 0 && height > 0) {
 				outputImage = Scalr.crop(outputImage, x, y, width, height);
 			}
-		}
+		}*/
 
 		inputImage.flush();
 		outputImage.flush();

@@ -1,7 +1,5 @@
 package com.revature.controllers;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -13,9 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.revature.beans.Moderator;
-import com.revature.beans.Post;
 import com.revature.dao.ModDao;
-import com.revature.dao.PostDao;
 
 @Controller
 @RequestMapping("/moderator")
@@ -36,6 +32,7 @@ public class ModController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/board/catalog");
 		ra.addFlashAttribute("moderator", mod);
+		ac.close();
 		return mav;
 	}
 }
