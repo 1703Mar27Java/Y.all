@@ -25,15 +25,22 @@ form {
 </style>
 </head>
 <body>
-	<c:if test="${moderator.exists()}">
+	<div id="nav">
 		<ul>
-			<li>${moderator.getUsername()}
-			<li>
-			<li><a href="/ProjectTwo/board/modFlags">Flags</a></li>
-			<li><a href="logout">Logout</a></li>
+			<li><a href="catalog">Catalog</a></li>
+			<li><a>Thread No. <c:out value="${threadId}" /> <c:out
+						value="${op.getSubject()}" /></a></li>
+			<c:if test="${moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
+				<li style="float: right"><a class="active"
+					href="/ProjectTwo/board/modFlags">Flags</a></li>
+			</c:if>
+			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
-	</c:if>
-	<form method="POST" action="/ProjectTwo/board/post" enctype="multipart/form-data">
+	</div>
+
+	<form method="POST" action="/ProjectTwo/board/post"
+		enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
@@ -67,8 +74,8 @@ form {
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
 					</c:if></td>
-				<td><c:out value="${row.getName()}" />
-					<c:if test="${row.getName() == null}">Anonymous</c:if></td>
+				<td><c:out value="${row.getName()}" /> <c:if
+						test="${row.getName() == null}">Anonymous</c:if></td>
 				<td><c:out value="${row.getSubject()}" /></td>
 				<td><c:out value="${row.getTimeFormatted()}" /></td>
 				<td class="postRow" data-post="${row.getId()}">No. <c:out
@@ -102,6 +109,19 @@ form {
 			}
 			txt.val(txt.val() + ">>" + post + "\n" + sel);
 		});
+		setInterval(function(){
+			var chour = new Date().getHours();
+			if (chour > 12)
+				chour -= 12;
+			var cmin = new Date().getMinutes();
+			if (cmin < 10)
+				cmin = '0' + cmin;
+			var csec = new Date().getSeconds();
+			if (csec < 10)
+				csec = '0' + csec;
+			$("#currentTime").html(chour + ":" + cmin + ":" + csec 
+				+ " " + (new Date().getHours() <= 12 ? 'AM' : 'PM'));
+		}, 1000);
 	});
 </script>
 </html>
