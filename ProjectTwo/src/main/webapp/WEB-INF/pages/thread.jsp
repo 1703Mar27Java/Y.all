@@ -13,8 +13,9 @@
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/3-col-portfolio.css">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/imageboard.css" />">
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <style>
 form {
@@ -24,13 +25,14 @@ form {
 </style>
 </head>
 <body>
-<c:if test="${moderator.exists()}">
-	<ul>
-		<li>${moderator.getUsername()}<li>
-		<li><a href="modFlags">Flags</a></li>
-		<li><a href="logout">Logout</a></li>
-	</ul>
-</c:if>
+	<c:if test="${moderator.exists()}">
+		<ul>
+			<li>${moderator.getUsername()}
+			<li>
+			<li><a href="modFlags">Flags</a></li>
+			<li><a href="logout">Logout</a></li>
+		</ul>
+	</c:if>
 	<form method="POST" action="reply" enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
@@ -65,10 +67,12 @@ form {
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
 					</c:if></td>
-				<td><c:out value="${row.getName()}" /><c:if test="${row.getName() == null}">Anonymous</c:if></td>
+				<td><c:out value="${row.getName()}" />
+					<c:if test="${row.getName() == null}">Anonymous</c:if></td>
 				<td><c:out value="${row.getSubject()}" /></td>
 				<td><c:out value="${row.getTimeFormatted()}" /></td>
-				<td class="postRow" data-post="${row.getId()}">No. <c:out value="${row.getId()}" /></td>
+				<td class="postRow" data-post="${row.getId()}">No. <c:out
+						value="${row.getId()}" /></td>
 				<td>
 					<form method="POST" action="flagPost">
 						<input name="postId" type="hidden" value="${row.getId()}" /> <input
@@ -77,26 +81,27 @@ form {
 				</td>
 			</tr>
 			<tr>
-				<td id="postComment" rowspan="2" colspan="5"><c:out value="${row.getComment()}" /></td>
+				<td id="postComment" rowspan="2" colspan="5"><c:out
+						value="${row.getComment()}" /></td>
 			</tr>
 			<tr></tr>
 		</table>
 	</c:forEach>
 </body>
 <script>
-$(document).ready(function(){
-	$(".postRow").click(function(){
-		var post = $(this).data('post');
-		var sel = $(this).closest('tr').next('tr').find('td').text();
-		var txt = $("#comment");
-		if (sel) {
-			sel = ">" + sel;
-		}
-		if (txt.val()) {
-			txt.val(txt.val() + "\n")
-		}
-		txt.val(txt.val() + ">>" + post + "\n" + sel);		
+	$(document).ready(function() {
+		$(".postRow").click(function() {
+			var post = $(this).data('post');
+			var sel = $(this).closest('tr').next('tr').find('td').text();
+			var txt = $("#comment");
+			if (sel) {
+				sel = ">" + sel;
+			}
+			if (txt.val()) {
+				txt.val(txt.val() + "\n")
+			}
+			txt.val(txt.val() + ">>" + post + "\n" + sel);
+		});
 	});
-});
 </script>
 </html>

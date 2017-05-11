@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,16 +48,15 @@ public class PostController {
 		return "catalog";
 	}
 	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
-	public String flaggedThreads(Model m){
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		if(true/*m.containsAttribute("moderator")*/){	//if statement is to stop users from typing url
+	public String flaggedThreads(@ModelAttribute("moderator") @Validated Moderator mod, Model m){
+		if(mod.getUsername() != null){	//if statement is to stop users from typing url
+			AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 			PostDao postDao = (PostDao) ac.getBean("myDao");
 			m.addAttribute("flaggedPosts", postDao.loadFlags());
-		}else{
 			ac.close();
+		} else {
 			return "catalog";
 		}
-		ac.close();
 		return "modflags";
 	}
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
