@@ -48,8 +48,9 @@ public class PostController {
 		return "catalog";
 	}
 	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
-	public String flaggedThreads(@ModelAttribute("moderator") @Validated Moderator mod, Model m){
-		if(mod.getUsername() != null){	//if statement is to stop users from typing url
+	public String flaggedThreads(HttpSession session, Model m){
+		Moderator mod = (Moderator) session.getAttribute("moderator");
+		if(mod != null){
 			AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 			PostDao postDao = (PostDao) ac.getBean("myDao");
 			m.addAttribute("flaggedPosts", postDao.loadFlags());
@@ -81,11 +82,12 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String addThread(@RequestParam("name") String name, @RequestParam("subject") String subject,
+	public String addPost(@RequestParam("parent") int parent, @RequestParam("name") String name, @RequestParam("subject") String subject,
 			@RequestParam("comment") String comment, @RequestParam("file") MultipartFile file, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		Post p = (Post) ac.getBean("post");
+		p.setParent(parent);
 		p.setName(name);
 		p.setSubject(subject);
 		p.setComment(comment);
@@ -105,20 +107,16 @@ public class PostController {
 		}
 		
 		dao.create(p);
-		m.addAttribute("threadId", p.getId());
+		String url = "thread/";
+		if (p.getParent() == 0) {
+			url += p.getId();
+		} else {
+			url += p.getParent();
+		}
+		m.addAttribute("url", url);
 		m.addAttribute("message", "Post Successful!");
 		ac.close();
 		return "result";
-	}
-
-	@RequestMapping(value = "/thread/0", method = RequestMethod.GET)
-	public String getThread(Model m) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("listThreads", dao.loadThread(0));
-		m.addAttribute("post", new Post());
-		ac.close();
-		return "catalog";
 	}
 
 	@RequestMapping(value = "/thread/{threadId}", method = RequestMethod.GET)
@@ -136,38 +134,6 @@ public class PostController {
 		return "thread";
 	}
 
-	@RequestMapping(value = "/thread/reply", method = RequestMethod.POST)
-	public String addPost(@RequestParam("parent") int parent, @RequestParam("name") String name, @RequestParam("subject") String subject,
-			@RequestParam("comment") String comment, @RequestParam("file") MultipartFile file, Model m) {
-		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		PostDao dao = (PostDao) ac.getBean("myDao");
-		Post p = (Post) ac.getBean("post");
-		p.setParent(parent);
-		p.setName(name);
-		p.setSubject(subject);
-		p.setComment(comment);
-		
-		if (!file.isEmpty()) {
-			try {
-				p.setImage(file.getBytes());
-				BufferedImage inputImage = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-				BufferedImage thumbnail = resizeImage(inputImage, 150, 150);
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(thumbnail, "jpg", baos);
-				baos.flush();
-				p.setImage(file.getBytes());
-				p.setThumb(baos.toByteArray());
-				baos.close();
-			} catch (IOException e) {
-			}
-		}
-		
-		dao.create(p);
-		m.addAttribute("threadId", p.getParent());
-		ac.close();
-		return "result";
-	}
-
 	@RequestMapping(value = "/thread/flagPost")
 	public String flagPost(@RequestParam("postId") int postId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
@@ -178,6 +144,14 @@ public class PostController {
 		dao.update(p);
 		m.addAttribute("threadId", p.getParent());
 		ac.close();
+		String url = "thread/";
+		if (p.getParent() == 0) {
+			url += p.getId();
+		} else {
+			url += p.getParent();
+		}
+		m.addAttribute("url", url);
+		m.addAttribute("message", "Post Reported!");
 		return "result";
 	}
 	@RequestMapping(value = "/thread/unflagPost")
