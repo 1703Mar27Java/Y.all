@@ -24,6 +24,13 @@ form {
 </style>
 </head>
 <body>
+<c:if test="${moderator.exists()}">
+	<ul>
+		<li>${moderator.getUsername()}<li>
+		<li><a href="modFlags">Flags</a></li>
+		<li><a href="logout">Logout</a></li>
+	</ul>
+</c:if>
 	<form method="POST" action="reply" enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>

@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
 import org.springframework.context.support.*;
@@ -34,12 +35,13 @@ public class PostController {
 	@RequestMapping(value="/modLogin", method=RequestMethod.POST)
 	public String modLogin(@RequestParam(value="username") String username,
 						   @RequestParam(value="password") String password,
+						   HttpSession session,
 						   Model m){
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		ModDao modDao = (ModDao) ac.getBean("myModDao");
 		PostDao postDao = (PostDao) ac.getBean("myDao");
 		Moderator mod = modDao.getModByLogin(username, password);
-		m.addAttribute("moderator", mod);
+		session.setAttribute("moderator", mod);
 		m.addAttribute("listThreads", postDao.loadThread(0));
 		m.addAttribute("post", new Post());
 		ac.close();
@@ -57,6 +59,15 @@ public class PostController {
 		}
 		ac.close();
 		return "modflags";
+	}
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String modLogout(Model m, HttpSession session){
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		session.invalidate();
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		m.addAttribute("listThreads", dao.loadThread(0));
+		ac.close();
+		return "catalog";
 	}
 	
 

@@ -14,12 +14,15 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
 </head>
 <body>
+<c:if test="${moderator.exists()}">
+	<ul>
+		<li>${moderator.getUsername()}<li>
+		<li><a href="modFlags">Flags</a></li>
+		<li><a href="logout">Logout</a></li>
+	</ul>
+</c:if>
+
 <div class="container-fluid">
-	<c:if test="${moderator.exists()}">
-		<h4 style="color: red;text-align:center;">${moderator.getUsername()}</h4>
-		<a href="modFlags" class="button">Flags</a>
-	</c:if>
-	
 	<form method="POST" action="post" enctype="multipart/form-data">
 		<h3>Start New Thread</h3>
 		<table>

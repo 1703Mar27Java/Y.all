@@ -2,10 +2,40 @@
 body{
 	background: #81b69d;/* #5aa17f */
 }
+h4{
+	color: red;
+	text-align:center;
+	margin-left: 40%;
+	margin-bottom: 30px;
+}
 form{
+	clear: left;
 	float: left;
 	margin-left:30px;
 }
+
+ul {
+	position: fixed;
+    top: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #111;
+}
+
 a:hover{
 	text-decoration:none;
 }
@@ -20,6 +50,21 @@ a:hover{
     font-size: 14px;
     margin: 4px 2px;
     cursor: pointer;
+}
+.redbutton{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.redbutton:hover{
+	box-shadow: 0px 5px 5px #888888;
 }
 .button:hover{
 	box-shadow: 0px 5px 5px #888888;
