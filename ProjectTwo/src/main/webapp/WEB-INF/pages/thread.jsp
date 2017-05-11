@@ -65,10 +65,10 @@ form {
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
 					</c:if></td>
-				<td id="postRow" data-post="${row.getId()}">${row.getId()}</td>
-				<td><c:out value="${row.getName()}" /></td>
+				<td><c:out value="${row.getName()}" /><c:if test="${row.getName() == null}">Anonymous</c:if></td>
 				<td><c:out value="${row.getSubject()}" /></td>
 				<td><c:out value="${row.getTimeFormatted()}" /></td>
+				<td class="postRow" data-post="${row.getId()}">No. <c:out value="${row.getId()}" /></td>
 				<td>
 					<form method="POST" action="flagPost">
 						<input name="postId" type="hidden" value="${row.getId()}" /> <input
@@ -77,7 +77,7 @@ form {
 				</td>
 			</tr>
 			<tr>
-				<td rowspan="2" colspan="5"><c:out value="${row.getComment()}" /></td>
+				<td id="postComment" rowspan="2" colspan="5"><c:out value="${row.getComment()}" /></td>
 			</tr>
 			<tr></tr>
 		</table>
@@ -85,9 +85,17 @@ form {
 </body>
 <script>
 $(document).ready(function(){
-	$("#postRow").click(function(){
+	$(".postRow").click(function(){
 		var post = $(this).data('post');
-		$("#comment").val(">>" + post + "\n");
+		var sel = $(this).closest('tr').next('tr').find('td').text();
+		var txt = $("#comment");
+		if (sel) {
+			sel = ">" + sel;
+		}
+		if (txt.val()) {
+			txt.val(txt.val() + "\n")
+		}
+		txt.val(txt.val() + ">>" + post + "\n" + sel);		
 	});
 });
 </script>
