@@ -180,9 +180,10 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/thread/{threadId}/delete")
-	public String removePost(@ModelAttribute("post") @Validated Post p) {
+	public String removePost(@PathVariable int threadId) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
+		Post p = dao.loadPost(threadId);
 		dao.delete(p);
 		ac.close();
 		return "result";

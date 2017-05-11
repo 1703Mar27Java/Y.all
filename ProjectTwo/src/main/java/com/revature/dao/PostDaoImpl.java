@@ -57,7 +57,7 @@ public class PostDaoImpl implements PostDao {
 	public void delete(Post p) {
 		Session session = this.sessionFactory.getCurrentSession();
 		if (p.getParent() == 0) {
-			Query query = session.createQuery("DELETE FROM Post WHERE parent = :parentId");
+			Query query = session.createQuery("DELETE Post p WHERE p.parent = :parentId");
 			query.setParameter("parentId", p.getId());
 			query.executeUpdate();
 		}
