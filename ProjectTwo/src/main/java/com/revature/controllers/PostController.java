@@ -48,8 +48,9 @@ public class PostController {
 		return "catalog";
 	}
 	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
-	public String flaggedThreads(@ModelAttribute("moderator") @Validated Moderator mod, Model m){
-		if(mod.getUsername() != null){	//if statement is to stop users from typing url
+	public String flaggedThreads(HttpSession session, Model m){
+		Moderator mod = (Moderator) session.getAttribute("moderator");
+		if(mod != null){
 			AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 			PostDao postDao = (PostDao) ac.getBean("myDao");
 			m.addAttribute("flaggedPosts", postDao.loadFlags());
