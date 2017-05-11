@@ -29,7 +29,7 @@ form {
 		<ul>
 			<li>${moderator.getUsername()}
 			<li>
-			<li><a href="modFlags">Flags</a></li>
+			<li><a href="/ProjectTwo/board/modFlags">Flags</a></li>
 			<li><a href="logout">Logout</a></li>
 		</ul>
 	</c:if>
