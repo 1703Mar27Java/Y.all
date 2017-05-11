@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h1>${message}</h1>
-	<p><a href="/ProjectTwo/board/thread/${threadId}">Continue to Thread</a></p>
+	<p><a href="/ProjectTwo/board/${url}">Continue to Thread</a></p>
 </body>
 </html>

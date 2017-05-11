@@ -33,7 +33,7 @@ form {
 			<li><a href="logout">Logout</a></li>
 		</ul>
 	</c:if>
-	<form method="POST" action="reply" enctype="multipart/form-data">
+	<form method="POST" action="/ProjectTwo/board/post" enctype="multipart/form-data">
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
