@@ -239,34 +239,6 @@ public class PostController {
 			outputImage = Scalr.resize(outputImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH, resultWidth);
 		}
 
-		/*int paddingSize = 0;
-		if (outputImage.getWidth() != resultWidth) {
-			paddingSize = (resultWidth - outputImage.getWidth()) / 2;
-		} else if (outputImage.getHeight() != resultHeight) {
-			paddingSize = (resultHeight - outputImage.getHeight()) / 2;
-		}
-
-		if (paddingSize > 0) {
-			outputImage = Scalr.pad(outputImage, paddingSize);
-
-			int x = 0, y = 0, width = 0, height = 0;
-			if (outputImage.getWidth() > resultWidth) {
-				x = paddingSize;
-				y = 0;
-				width = outputImage.getWidth() - (2 * paddingSize);
-				height = outputImage.getHeight();
-			} else if (outputImage.getHeight() > resultHeight) {
-				x = 0;
-				y = paddingSize;
-				width = outputImage.getWidth();
-				height = outputImage.getHeight() - (2 * paddingSize);
-			}
-
-			if (width > 0 && height > 0) {
-				outputImage = Scalr.crop(outputImage, x, y, width, height);
-			}
-		}*/
-
 		inputImage.flush();
 		outputImage.flush();
 
