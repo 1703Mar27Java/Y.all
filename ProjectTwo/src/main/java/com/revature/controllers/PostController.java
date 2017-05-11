@@ -180,7 +180,7 @@ public class PostController {
 		dao.update(p);
 		m.addAttribute("threadId", p.getParent());
 		ac.close();
-		return "result";
+		return "modflags";
 	}
 
 	@RequestMapping(value = "/thread/{threadId}/delete")
@@ -190,7 +190,7 @@ public class PostController {
 		Post p = dao.loadPost(threadId);
 		dao.delete(p);
 		ac.close();
-		return "result";
+		return "modflags";
 	}
 
 	@RequestMapping(value = "/img/{postId}", method=RequestMethod.GET, produces=MediaType.IMAGE_JPEG_VALUE)

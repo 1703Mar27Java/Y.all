@@ -28,9 +28,4 @@
 			</c:forEach>
 	</div>
 </body>
-<script>
-	$(document).ready({
-		
-	})
-</script>
 </html>
