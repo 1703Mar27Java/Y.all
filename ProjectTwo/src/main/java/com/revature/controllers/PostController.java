@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -114,10 +115,13 @@ public class PostController {
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		m.addAttribute("op", dao.loadPost(threadId));
+		Post op = dao.loadPost(threadId);
+		List<Post> posts = dao.loadThread(threadId);
+		posts.add(0, op);
+		m.addAttribute("op", op);
 		m.addAttribute("post", new Post());
 		m.addAttribute("threadId", threadId);
-		m.addAttribute("listPosts", dao.loadThread(threadId));
+		m.addAttribute("listPosts", posts);
 		ac.close();
 		return "thread";
 	}
@@ -239,34 +243,6 @@ public class PostController {
 		} else if (scaleMode.equals(Scalr.Mode.FIT_TO_HEIGHT) && outputImage.getWidth() > resultWidth) {
 			outputImage = Scalr.resize(outputImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH, resultWidth);
 		}
-
-		/*int paddingSize = 0;
-		if (outputImage.getWidth() != resultWidth) {
-			paddingSize = (resultWidth - outputImage.getWidth()) / 2;
-		} else if (outputImage.getHeight() != resultHeight) {
-			paddingSize = (resultHeight - outputImage.getHeight()) / 2;
-		}
-
-		if (paddingSize > 0) {
-			outputImage = Scalr.pad(outputImage, paddingSize);
-
-			int x = 0, y = 0, width = 0, height = 0;
-			if (outputImage.getWidth() > resultWidth) {
-				x = paddingSize;
-				y = 0;
-				width = outputImage.getWidth() - (2 * paddingSize);
-				height = outputImage.getHeight();
-			} else if (outputImage.getHeight() > resultHeight) {
-				x = 0;
-				y = paddingSize;
-				width = outputImage.getWidth();
-				height = outputImage.getHeight() - (2 * paddingSize);
-			}
-
-			if (width > 0 && height > 0) {
-				outputImage = Scalr.crop(outputImage, x, y, width, height);
-			}
-		}*/
 
 		inputImage.flush();
 		outputImage.flush();

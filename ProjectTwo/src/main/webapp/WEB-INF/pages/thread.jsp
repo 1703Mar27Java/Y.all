@@ -13,6 +13,8 @@
 	href="https://blackrockdigital.github.io/startbootstrap-3-col-portfolio/css/3-col-portfolio.css">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/imageboard.css" />">
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <style>
 form {
@@ -35,7 +37,7 @@ form {
 			</tr>
 			<tr>
 				<td>Comment:</td>
-				<td><textarea name="comment" rows="3" cols="20"></textarea></td>
+				<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="file" name="file" /></td>
@@ -48,39 +50,15 @@ form {
 	</form>
 	<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
 
-	<table border="1px solid black">
-		<tr>
-			<td rowspan="3"><c:if test="${op.getImage() != null}">
-					<a target="_blank" href="/ProjectTwo/board/img/${op.getId()}">
-						<img src="/ProjectTwo/board/thmb/${op.getId()}" />
-					</a>
-				</c:if></td>
-			<td><c:out value="${op.getId()}" /></td>
-			<td><c:out value="${op.getName()}" /></td>
-			<td><c:out value="${op.getSubject()}" /></td>
-			<td><c:out value="${op.getTimeFormatted()}" /></td>
-			<td>
-				<form method="POST" action="flagPost">
-					<input name="postId" type="hidden" value="${op.getId()}" /> <input
-						type="submit" value="Flag" />
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td rowspan="2" colspan="5">${op.getComment()}</td>
-		</tr>
-		<tr></tr>
-	</table>
-
 	<c:forEach var="row" items="${listPosts}">
-		<table border="1px solid black">
+		<table id="${row.getId()}" border="1px solid black">
 			<tr>
 				<td rowspan="3"><c:if test="${row.getImage() != null}">
 						<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
 					</c:if></td>
-				<td><c:out value="${row.getId()}" /></td>
+				<td id="postRow" data-post="${row.getId()}">${row.getId()}</td>
 				<td><c:out value="${row.getName()}" /></td>
 				<td><c:out value="${row.getSubject()}" /></td>
 				<td><c:out value="${row.getTimeFormatted()}" /></td>
@@ -98,4 +76,12 @@ form {
 		</table>
 	</c:forEach>
 </body>
+<script>
+$(document).ready(function(){
+	$("#postRow").click(function(){
+		var post = $(this).data('post');
+		$("#comment").val(">>" + post + "\n");
+	});
+});
+</script>
 </html>
