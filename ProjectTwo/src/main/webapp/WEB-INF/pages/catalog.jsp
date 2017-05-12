@@ -26,6 +26,7 @@
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
 					href="/ProjectTwo/board/modFlags">Flags</a></li>
+				<li><a>Logged in as Moderator</a></li>
 			</c:if>
 			<c:if test="${!moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
@@ -38,6 +39,7 @@
 	<div class="container-fluid">
 		<form method="POST" action="post" enctype="multipart/form-data">
 			<h3>Start New Thread</h3>
+			<input name="parent" type="hidden" value="0" />
 			<table>
 				<tr>
 					<td>Name:</td>
