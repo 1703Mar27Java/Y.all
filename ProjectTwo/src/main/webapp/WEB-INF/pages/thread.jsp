@@ -22,6 +22,20 @@ form {
 	float: none;
 	margin-left: 30px;
 }
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+}
+
+.show {
+	display: block;
+}
 </style>
 </head>
 <body>
@@ -35,41 +49,47 @@ form {
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
 					href="/ProjectTwo/board/modFlags">Flags</a></li>
+				<li><a>Logged in as Moderator</a></li>
+			</c:if>
+			<c:if test="${!moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
+						Login</a></li>
 			</c:if>
 			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
 	</div>
 
-	<form method="POST" action="/ProjectTwo/board/post"
-		enctype="multipart/form-data">
-		<h3>Reply to Thread</h3>
-		<input name="parent" type="hidden" value="${threadId}" />
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" name="name" /></td>
-			</tr>
-			<tr>
-				<td>Subject:</td>
-				<td><input type="text" name="subject" /></td>
-			</tr>
-			<tr>
-				<td>Comment:</td>
-				<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="file" name="file" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Post" /></td>
-			</tr>
-		</table>
-	</form>
-	<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
+	<div class="postForm">
+		<form method="POST" action="/ProjectTwo/board/post"
+			enctype="multipart/form-data">
+			<h3>Reply to Thread</h3>
+			<input name="parent" type="hidden" value="${threadId}" />
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input placeholder="Anonymous" type="text" name="name" /></td>
+				</tr>
+				<tr>
+					<td>Subject:</td>
+					<td><input type="text" name="subject" /></td>
+				</tr>
+				<tr>
+					<td>Comment:</td>
+					<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" name="file" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Post" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 	<c:forEach var="row" items="${listPosts}">
-		<table id="${row.getId()}" >
+		<table id="${row.getId()}" class="posts">
 			<tr>
 				<td height="150px" width="150px" align="center" rowspan="3"><c:if
 						test="${row.getImage() != null}">
@@ -84,10 +104,16 @@ form {
 				<td class="postRow" data-post="${row.getId()}">No. <c:out
 						value="${row.getId()}" /></td>
 				<td>
-					<form method="POST" action="flagPost">
-						<input name="postId" type="hidden" value="${row.getId()}" /> <input
-							type="submit" value="Flag" />
-					</form>
+					<div class="dropdown">
+						<button onclick="myFunction()" class="dropbtn">Tools</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a href="/ProjectTwo/board/thread/${row.getId()}/report">Report</a>
+							<c:if test="${moderator.exists()}">
+								<a href="/ProjectTwo/board/thread/${row.getId()}/edit">Edit</a>
+								<a href="/ProjectTwo/board/thread/${row.getId()}/delete">Delete</a>
+							</c:if>
+						</div>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -135,6 +161,29 @@ form {
 									+ (new Date().getHours() <= 12 ? 'AM'
 											: 'PM'));
 				}, 1000);
+
+				$(".dropbtn").click(function() {
+					$(this).next().toggleClass("show");
+				});
 			});
+
+	function myFunction() {
+		document.getElementsByClassName("dropdown-content").classList
+				.toggle("show");
+	}
+
+	window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn')) {
+
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if (openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	}
 </script>
 </html>

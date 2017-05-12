@@ -28,10 +28,12 @@ public class PostController {
 	public String welcomePage(Model m) {
 		return "index";
 	}
+	
 	@RequestMapping(value="/modLogin",method=RequestMethod.GET)
 	public String modLogin(Model m) {
 		return "modlogin";
 	}
+	
 	@RequestMapping(value="/modLogin", method=RequestMethod.POST)
 	public String modLogin(@RequestParam(value="username") String username,
 						   @RequestParam(value="password") String password,
@@ -47,6 +49,7 @@ public class PostController {
 		ac.close();
 		return "catalog";
 	}
+	
 	@RequestMapping(value="/modFlags", method=RequestMethod.GET)
 	public String flaggedThreads(HttpSession session, Model m){
 		Moderator mod = (Moderator) session.getAttribute("moderator");
@@ -60,6 +63,7 @@ public class PostController {
 		}
 		return "modflags";
 	}
+	
 	@RequestMapping(value = "/thread/{threadId}/edit", method=RequestMethod.GET)
 	public String modEdit(@PathVariable int threadId, HttpSession session, Model m) {
 		Moderator mod = (Moderator) session.getAttribute("moderator");
@@ -74,6 +78,7 @@ public class PostController {
 		}
 		return "modedit";
 	}
+	
 	@RequestMapping(value = "/thread/{threadId}/edit", method=RequestMethod.POST)
 	public String modEditPost(@PathVariable int threadId, @RequestParam String name,
 							  @RequestParam String subject, @RequestParam String comment, 
@@ -106,7 +111,6 @@ public class PostController {
 		return "catalog";
 	}
 	
-
 	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
 	public String getThreads(Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
@@ -153,6 +157,17 @@ public class PostController {
 		m.addAttribute("message", "Post Successful!");
 		ac.close();
 		return "result";
+	}
+	
+	@RequestMapping(value = "/thread/{postId}/report", method = RequestMethod.GET)
+	public String reportPost(@PathVariable int postId, Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		Post p = dao.loadPost(postId);
+		m.addAttribute("reported", p);
+		m.addAttribute("action", "report");
+		ac.close();
+		return "confirm";
 	}
 
 	@RequestMapping(value = "/thread/{threadId}", method = RequestMethod.GET)
@@ -202,8 +217,19 @@ public class PostController {
 		ac.close();
 		return "modflags";
 	}
+	
+	@RequestMapping(value = "/thread/{postId}/delete", method = RequestMethod.GET)
+	public String confirmDelete(@PathVariable int postId, Model m) {
+		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		PostDao dao = (PostDao) ac.getBean("myDao");
+		Post p = dao.loadPost(postId);
+		m.addAttribute("reported", p);
+		m.addAttribute("action", "delete");
+		ac.close();
+		return "confirm";
+	}
 
-	@RequestMapping(value = "/thread/{threadId}/delete")
+	@RequestMapping(value = "/thread/{threadId}/delete", method = RequestMethod.POST)
 	public String removePost(@PathVariable int threadId) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");

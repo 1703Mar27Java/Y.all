@@ -43,7 +43,7 @@
 			<table>
 				<tr>
 					<td>Name:</td>
-					<td><input type="text" name="name" /></td>
+					<td><input placeholder="Anonymous" type="text" name="name" /></td>
 				</tr>
 				<tr>
 					<td>Subject:</td>
