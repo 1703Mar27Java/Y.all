@@ -28,7 +28,7 @@ form {
 	<div id="nav">
 		<ul>
 			<li><a href="catalog">Catalog</a></li>
-			<li><a>Thread No. <c:out value="${threadId}" /> <c:out
+			<li><a>-> Thread No. <c:out value="${threadId}" /> <c:out
 						value="${op.getSubject()}" /></a></li>
 			<c:if test="${moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
@@ -69,7 +69,7 @@ form {
 	<c:forEach var="row" items="${listPosts}">
 		<table id="${row.getId()}" border="1px solid black">
 			<tr>
-				<td rowspan="3"><c:if test="${row.getImage() != null}">
+				<td height="150px" width="150px" align="center" rowspan="3"><c:if test="${row.getImage() != null}">
 						<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
