@@ -22,6 +22,48 @@ form {
 	float: none;
 	margin-left: 30px;
 }
+
+.dropbtn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+	background-color: #3e8e41;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #f1f1f1
+}
+
+.show {
+	display: block;
+}
 </style>
 </head>
 <body>
@@ -82,6 +124,24 @@ form {
 				<td class="postRow" data-post="${row.getId()}">No. <c:out
 						value="${row.getId()}" /></td>
 				<td>
+					<div class="dropdown">
+						<button onclick="myFunction()" class="dropbtn">Tools</button>
+						<div id="myDropdown" class="dropdown-content">
+							<form method="POST" action="flagPost">
+								<input name="postId" type="hidden" value="${row.getId()}" /> <input
+									type="submit" value="Report" />
+							</form>
+							<c:if test="${moderator.exists()}">
+							<form method="POST" action="flagPost">
+								<input name="postId" type="hidden" value="${row.getId()}" /> <input
+									type="submit" value="Report" />
+							</form>
+								<a href="#">Delete</a>
+							</c:if>
+						</div>
+					</div>
+				</td>
+				<td>
 					<form method="POST" action="flagPost">
 						<input name="postId" type="hidden" value="${row.getId()}" /> <input
 							type="submit" value="Flag" />
@@ -134,5 +194,25 @@ form {
 											: 'PM'));
 				}, 1000);
 			});
+	/* When the user clicks on the button,
+	toggle between hiding and showing the dropdown content */
+	function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	// Close the dropdown menu if the user clicks outside of it
+	window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn')) {
+
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if (openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	}
 </script>
 </html>
