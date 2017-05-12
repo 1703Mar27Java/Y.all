@@ -26,6 +26,10 @@
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
 					href="/ProjectTwo/board/modFlags">Flags</a></li>
+				<li><a>Logged in as Moderator</a></li>
+			</c:if>
+			<c:if test="${!moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin Login</a></li>
 			</c:if>
 			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>

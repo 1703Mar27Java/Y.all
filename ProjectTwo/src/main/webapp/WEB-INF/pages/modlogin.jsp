@@ -24,11 +24,6 @@ form {
 	<div id="nav">
 		<ul>
 			<li><a href="catalog">Catalog</a></li>
-			<c:if test="${moderator.exists()}">
-				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
-				<li style="float: right"><a class="active"
-					href="/ProjectTwo/board/modFlags">Flags</a></li>
-			</c:if>
 			<c:if test="${!moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
 						Login</a></li>

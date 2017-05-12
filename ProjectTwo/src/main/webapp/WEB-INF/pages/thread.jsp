@@ -26,6 +26,12 @@ form {
 .dropdown {
 	position: relative;
 	display: inline-block;
+    border: none;
+    color: #5aa17f;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #333;
 }
 
 .dropdown-content {
@@ -48,6 +54,10 @@ form {
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
 					href="/ProjectTwo/board/modFlags">Flags</a></li>
+				<li><a>Logged in as Moderator</a></li>
+			</c:if>
+			<c:if test="${!moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin Login</a></li>
 			</c:if>
 			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
@@ -106,12 +116,6 @@ form {
 							</c:if>
 						</div>
 					</div>
-				</td>
-				<td>
-					<form method="POST" action="flagPost">
-						<input name="postId" type="hidden" value="${row.getId()}" /> <input
-							type="submit" value="Flag" />
-					</form>
 				</td>
 			</tr>
 			<tr>
