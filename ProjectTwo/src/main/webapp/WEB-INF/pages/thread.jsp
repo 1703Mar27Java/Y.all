@@ -27,6 +27,7 @@ form {
 <body>
 	<div id="nav">
 		<ul>
+			<li><a href="/ProjectTwo/board/index"><img src="<c:url value="/resources/static-images/merjpostSmall.png" />" style="max-height:30px;"></a></li>
 			<li><a href="/ProjectTwo/board/catalog">Catalog</a></li>
 			<li><a>-> Thread No. <c:out value="${threadId}" /> <c:out
 						value="${op.getSubject()}" /></a></li>
@@ -68,7 +69,7 @@ form {
 	<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
 
 	<c:forEach var="row" items="${listPosts}">
-		<table id="${row.getId()}" border="1px solid black">
+		<table id="${row.getId()}" >
 			<tr>
 				<td height="150px" width="150px" align="center" rowspan="3"><c:if
 						test="${row.getImage() != null}">

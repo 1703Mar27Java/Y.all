@@ -7,9 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
+<style>
+img{
+	position:absolute;
+	top:100px;
+	left:26%;
+	z-index:-1;
+	display:block;
+}
+a{
+	position:relative;
+	left:33%;
+	top:360px;
+	z-index:2;
+}
+</style>
 </head>
 <body>
-<h1>Welcome to Imageboard</h1>
+<img src="<c:url value="/resources/static-images/merjpost5.png" />" alt="Since 2017">
 <a href="modLogin" class="button">Moderator Login</a><a href="catalog" class="button">View Catalog</a>
 </body>
 </html>

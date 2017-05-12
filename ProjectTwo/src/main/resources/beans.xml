@@ -20,6 +20,14 @@
 		<property name="username" value="admin"></property>
 		<property name="password" value="admin"></property>
 	</bean>
+	
+	<!-- <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@testdb.cein4vlkztcp.us-west-2.rds.amazonaws.com:1521:ORCL"></property>
+		<property name="username" value="Master"></property>
+		<property name="password" value="p4ssw0rd"></property>
+	</bean> -->
 
 	<!-- sessionfactory -->
 	<bean id="mySessionFactory"

@@ -16,12 +16,13 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
+<style>
+</style>
 </head>
 <body>
 <div id="nav">
 		<ul>
-			<li><a href="/ProjectTwo/board/index">Index</a></li>
+			<li><a href="/ProjectTwo/board/index"><img src="<c:url value="/resources/static-images/merjpostSmall.png" />" style="max-height:30px;"></a></li>
 			<c:if test="${moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
