@@ -13,6 +13,17 @@
 <title>Flagged Posts</title>
 </head>
 <body>
+	<div id="nav">
+		<ul>
+			<li><a href="catalog">Catalog</a></li>
+			<c:if test="${moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
+				<li style="float: right"><a class="active"
+					href="/ProjectTwo/board/modFlags">Flags</a></li>
+			</c:if>
+			<li style="float: right"><a id="currentTime"></a></li>
+		</ul>
+	</div>
 	<div class="row">
 			<c:forEach var="row" items="${flaggedPosts}">
 				<div class="col-md-4 portfolio-item" style="max-height:375px; max-width:300px;overflow:hidden;float:left;">
@@ -21,7 +32,7 @@
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
 					<a id="delete" href="/ProjectTwo/board/thread/${row.getId()}/delete" class="redbutton">Delete</a>
 					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/ignore" class="redbutton">Ignore</a>
-					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/ignore" class="redbutton">Edit</a>
+					<a id="edit" href="/ProjectTwo/board/thread/${row.getId()}/edit" class="redbutton">Edit</a>
 					<h3><c:out value="${row.getSubject()}" /></h3>
 					<p><c:out value="${row.getComment()}" /></p>
 				</center>

@@ -14,13 +14,17 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
 </head>
 <body>
-<c:if test="${moderator.exists()}">
-	<ul>
-		<li>${moderator.getUsername()}<li>
-		<li><a href="modFlags">Flags</a></li>
-		<li><a href="logout">Logout</a></li>
-	</ul>
-</c:if>
+<div id="nav">
+		<ul>
+			<li><a href="/ProjectTwo/board/index">Index</a></li>
+			<c:if test="${moderator.exists()}">
+				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
+				<li style="float: right"><a class="active"
+					href="/ProjectTwo/board/modFlags">Flags</a></li>
+			</c:if>
+			<li style="float: right"><a id="currentTime"></a></li>
+		</ul>
+	</div>
 
 <div class="container-fluid">
 	<form method="POST" action="post" enctype="multipart/form-data">

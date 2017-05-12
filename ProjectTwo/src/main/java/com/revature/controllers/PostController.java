@@ -60,6 +60,42 @@ public class PostController {
 		}
 		return "modflags";
 	}
+	@RequestMapping(value = "/thread/{threadId}/edit", method=RequestMethod.GET)
+	public String modEdit(@PathVariable int threadId, HttpSession session, Model m) {
+		Moderator mod = (Moderator) session.getAttribute("moderator");
+		if(mod != null){
+			AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+			PostDao dao = (PostDao) ac.getBean("myDao");
+			Post p = dao.loadPost(threadId);
+			m.addAttribute("post",p);
+			ac.close();
+		}else{
+			return "catalog";
+		}
+		return "modedit";
+	}
+	@RequestMapping(value = "/thread/{threadId}/edit", method=RequestMethod.POST)
+	public String modEditPost(@PathVariable int threadId, @RequestParam String name,
+							  @RequestParam String subject, @RequestParam String comment, 
+							  HttpSession session, Model m) {
+		Moderator mod = (Moderator) session.getAttribute("moderator");
+		if(mod != null){
+			AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+			PostDao dao = (PostDao) ac.getBean("myDao");
+			Post p = dao.loadPost(threadId);
+			p.setName(name);
+			p.setSubject(subject);
+			p.setComment(comment);
+			p.setFlag(0);
+			dao.update(p);
+			m.addAttribute("message", "Edit to post "+threadId+" successful!");
+			m.addAttribute("url", "modFlags");
+			ac.close();
+		}else{
+			return "catalog";
+		}
+		return "result";
+	}
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String modLogout(Model m, HttpSession session){
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
