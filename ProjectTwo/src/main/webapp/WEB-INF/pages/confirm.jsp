@@ -29,7 +29,8 @@
 				<li><a>Logged in as Moderator</a></li>
 			</c:if>
 			<c:if test="${!moderator.exists()}">
-				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin Login</a></li>
+				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
+						Login</a></li>
 			</c:if>
 			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
@@ -57,10 +58,19 @@
 		<tr></tr>
 	</table>
 
-	<form method="POST" action="/ProjectTwo/board/thread/flagPost">
-		<input name="postId" type="hidden" value="${reported.getId()}" /> <input
-			type="submit" value="Confirm" />
-	</form>
+	<c:if test="${action == 'report'}">
+		<form method="POST" action="/ProjectTwo/board/thread/flagPost">
+			<input name="postId" type="hidden" value="${reported.getId()}" /> <input
+				type="submit" value="Confirm Report" />
+		</form>
+	</c:if>
+
+	<c:if test="${action == 'delete'}">
+		<form method="POST"
+			action="/ProjectTwo/board/thread/${reported.getId()}/delete">
+			<input type="submit" value="Confirm Delete" />
+		</form>
+	</c:if>
 </body>
 <script>
 	$(document).ready(

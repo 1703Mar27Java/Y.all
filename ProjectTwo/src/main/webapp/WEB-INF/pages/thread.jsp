@@ -26,12 +26,6 @@ form {
 .dropdown {
 	position: relative;
 	display: inline-block;
-    border: none;
-    color: #5aa17f;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    background-color: #333;
 }
 
 .dropdown-content {
@@ -57,41 +51,44 @@ form {
 				<li><a>Logged in as Moderator</a></li>
 			</c:if>
 			<c:if test="${!moderator.exists()}">
-				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin Login</a></li>
+				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
+						Login</a></li>
 			</c:if>
 			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
 	</div>
 
-	<form method="POST" action="/ProjectTwo/board/post"
-		enctype="multipart/form-data">
-		<h3>Reply to Thread</h3>
-		<input name="parent" type="hidden" value="${threadId}" />
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input type="text" name="name" /></td>
-			</tr>
-			<tr>
-				<td>Subject:</td>
-				<td><input type="text" name="subject" /></td>
-			</tr>
-			<tr>
-				<td>Comment:</td>
-				<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="file" name="file" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Post" /></td>
-			</tr>
-		</table>
-	</form>
+	<div class="postForm">
+		<form method="POST" action="/ProjectTwo/board/post"
+			enctype="multipart/form-data">
+			<h3>Reply to Thread</h3>
+			<input name="parent" type="hidden" value="${threadId}" />
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input placeholder="Anonymous" type="text" name="name" /></td>
+				</tr>
+				<tr>
+					<td>Subject:</td>
+					<td><input type="text" name="subject" /></td>
+				</tr>
+				<tr>
+					<td>Comment:</td>
+					<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" name="file" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Post" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 	<c:forEach var="row" items="${listPosts}">
-		<table id="${row.getId()}" border="1px solid black">
+		<table id="${row.getId()}" class="posts">
 			<tr>
 				<td height="150px" width="150px" align="center" rowspan="3"><c:if
 						test="${row.getImage() != null}">
@@ -109,7 +106,7 @@ form {
 					<div class="dropdown">
 						<button onclick="myFunction()" class="dropbtn">Tools</button>
 						<div id="myDropdown" class="dropdown-content">
-								<a href="/ProjectTwo/board/thread/${row.getId()}/report">Report</a>
+							<a href="/ProjectTwo/board/thread/${row.getId()}/report">Report</a>
 							<c:if test="${moderator.exists()}">
 								<a href="/ProjectTwo/board/thread/${row.getId()}/edit">Edit</a>
 								<a href="/ProjectTwo/board/thread/${row.getId()}/delete">Delete</a>
@@ -163,14 +160,17 @@ form {
 									+ (new Date().getHours() <= 12 ? 'AM'
 											: 'PM'));
 				}, 1000);
+
+				$(".dropbtn").click(function() {
+					$(this).next().toggleClass("show");
+				});
 			});
-	/* When the user clicks on the button,
-	toggle between hiding and showing the dropdown content */
+
 	function myFunction() {
-		document.getElementById("myDropdown").classList.toggle("show");
+		document.getElementsByClassName("dropdown-content").classList
+				.toggle("show");
 	}
 
-	// Close the dropdown menu if the user clicks outside of it
 	window.onclick = function(event) {
 		if (!event.target.matches('.dropbtn')) {
 
