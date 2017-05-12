@@ -65,7 +65,6 @@ form {
 			</tr>
 		</table>
 	</form>
-	<a href="/ProjectTwo/board/catalog">Return to Catalog</a>
 
 	<c:forEach var="row" items="${listPosts}">
 		<table id="${row.getId()}" border="1px solid black">
