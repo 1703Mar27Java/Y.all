@@ -5,11 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<<<<<<< HEAD
 <title>Submitted Info</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/imageboard.css" />">
 </head>
 <body>
 	<h1>${message}</h1>
 	<p><a href="/ProjectTwo/board/${url}">Continue</a></p>
+=======
+<title>Result</title>
+<script type="text/javascript">
+            function Redirect() {
+               window.location="/ProjectTwo/board/${url}";
+            }
+            setTimeout('Redirect()', 2000);
+      </script>
+</head>
+<body>
+	<h1>${message}</h1>
+	<p>
+		Redirecting <a id="link" href="/ProjectTwo/board/${url}">(or click
+			to continue)</a>
+	</p>
+>>>>>>> 1e09c64a9fd9f17f277d541d5f1ffbe7ce956d90
 </body>
 </html>

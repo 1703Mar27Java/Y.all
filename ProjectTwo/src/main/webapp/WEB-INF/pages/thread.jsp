@@ -27,8 +27,8 @@ form {
 <body>
 	<div id="nav">
 		<ul>
-			<li><a href="catalog">Catalog</a></li>
-			<li><a>Thread No. <c:out value="${threadId}" /> <c:out
+			<li><a href="/ProjectTwo/board/catalog">Catalog</a></li>
+			<li><a>-> Thread No. <c:out value="${threadId}" /> <c:out
 						value="${op.getSubject()}" /></a></li>
 			<c:if test="${moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
@@ -41,6 +41,7 @@ form {
 
 	<form method="POST" action="/ProjectTwo/board/post"
 		enctype="multipart/form-data">
+		<h3>Reply to Thread</h3>
 		<input name="parent" type="hidden" value="${threadId}" />
 		<table>
 			<tr>
@@ -69,7 +70,8 @@ form {
 	<c:forEach var="row" items="${listPosts}">
 		<table id="${row.getId()}" border="1px solid black">
 			<tr>
-				<td rowspan="3"><c:if test="${row.getImage() != null}">
+				<td height="150px" width="150px" align="center" rowspan="3"><c:if
+						test="${row.getImage() != null}">
 						<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 							<img src="/ProjectTwo/board/thmb/${row.getId()}" />
 						</a>
@@ -96,32 +98,42 @@ form {
 	</c:forEach>
 </body>
 <script>
-	$(document).ready(function() {
-		$(".postRow").click(function() {
-			var post = $(this).data('post');
-			var sel = $(this).closest('tr').next('tr').find('td').text();
-			var txt = $("#comment");
-			if (sel) {
-				sel = ">" + sel;
-			}
-			if (txt.val()) {
-				txt.val(txt.val() + "\n")
-			}
-			txt.val(txt.val() + ">>" + post + "\n" + sel);
-		});
-		setInterval(function(){
-			var chour = new Date().getHours();
-			if (chour > 12)
-				chour -= 12;
-			var cmin = new Date().getMinutes();
-			if (cmin < 10)
-				cmin = '0' + cmin;
-			var csec = new Date().getSeconds();
-			if (csec < 10)
-				csec = '0' + csec;
-			$("#currentTime").html(chour + ":" + cmin + ":" + csec 
-				+ " " + (new Date().getHours() <= 12 ? 'AM' : 'PM'));
-		}, 1000);
-	});
+	$(document).ready(
+			function() {
+				$(".postRow").click(
+						function() {
+							var post = $(this).data('post');
+							var sel = $(this).closest('tr').next('tr').find(
+									'td').text();
+							var txt = $("#comment");
+							if (sel) {
+								sel = ">" + sel;
+							}
+							if (txt.val()) {
+								txt.val(txt.val() + "\n")
+							}
+							txt.val(txt.val() + ">>" + post + "\n" + sel);
+						});
+				setInterval(function() {
+					var chour = new Date().getHours();
+					if (chour > 12)
+						chour -= 12;
+					var cmin = new Date().getMinutes();
+					if (cmin < 10)
+						cmin = '0' + cmin;
+					var csec = new Date().getSeconds();
+					if (csec < 10)
+						csec = '0' + csec;
+					$("#currentTime").html(
+							chour
+									+ ":"
+									+ cmin
+									+ ":"
+									+ csec
+									+ " "
+									+ (new Date().getHours() <= 12 ? 'AM'
+											: 'PM'));
+				}, 1000);
+			});
 </script>
 </html>
