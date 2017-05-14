@@ -33,13 +33,16 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public Post loadPost(int id) {
+	public Post loadPost(int id) throws NullPointerException{
 		Session session = this.sessionFactory.getCurrentSession();
 		Post p = (Post) session.get(Post.class, new Integer(id));
+		if(p == null){
+			throw new NullPointerException("Specified post doesn't exist");
+		}
 		return p;
 	}
 	
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public List<Post> loadThread(int id) {
 		Session session = this.sessionFactory.getCurrentSession();

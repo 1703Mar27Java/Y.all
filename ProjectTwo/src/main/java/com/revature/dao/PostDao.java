@@ -8,7 +8,7 @@ public interface PostDao {
 	
 	public List<Post> loadFlags();
 	
-	public Post loadPost(int id);
+	public Post loadPost(int id) throws NullPointerException;
 
 	public List<Post> loadThread(int id);
 
