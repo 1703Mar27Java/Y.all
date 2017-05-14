@@ -16,7 +16,7 @@
 	<div id="nav">
 		<ul>
 			<li><a href="/ProjectTwo/board/index"><img src="<c:url value="/resources/static-images/merjpostSmall.png" />" style="max-height:30px;"></a></li>
-			<li><a href="catalog">Catalog</a></li>
+			<li><a href="/ProjectTwo/board/catalog">Catalog</a></li>
 			<c:if test="${moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/logout">Logout</a></li>
 				<li style="float: right"><a class="active"
@@ -35,9 +35,15 @@
 				<center>
 					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
-					<a id="delete" href="/ProjectTwo/board/thread/${row.getId()}/delete" class="redbutton">Delete</a>
-					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/ignore" class="redbutton">Ignore</a>
-					<a id="edit" href="/ProjectTwo/board/thread/${row.getId()}/edit" class="redbutton">Edit</a>
+					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/unflag">
+						<img src="<c:url value="/resources/static-images/ignore.png" />" style="max-width:30px;">
+					</a>
+					<a id="edit" href="/ProjectTwo/board/thread/${row.getId()}/edit">
+						<img src="<c:url value="/resources/static-images/edit.png" />" style="max-width:20px;">
+					</a>
+					<a id="delete" href="/ProjectTwo/board/thread/${row.getId()}/delete">
+						<img src="<c:url value="/resources/static-images/delete.png" />" style="max-width:20px;">
+					</a>
 					<h3><c:out value="${row.getSubject()}" /></h3>
 					<p><c:out value="${row.getComment()}" /></p>
 				</center>

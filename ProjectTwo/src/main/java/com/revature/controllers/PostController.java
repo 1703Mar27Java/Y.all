@@ -211,15 +211,15 @@ public class PostController {
 		m.addAttribute("message", "Post Reported!");
 		return "result";
 	}
-	@RequestMapping(value = "/thread/unflagPost")
-	public String ignoreFlag(@RequestParam("postId") int postId, Model m) {
+	@RequestMapping(value = "/thread/{threadId}/unflag")
+	public String ignoreFlag(@PathVariable("threadId") int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
 		Post p = (Post) ac.getBean("post");
-		p = dao.loadPost(postId);
+		p = dao.loadPost(threadId);
 		p.setFlag(0);
 		dao.update(p);
-		m.addAttribute("threadId", p.getParent());
+		m.addAttribute("flaggedPosts", dao.loadFlags());
 		ac.close();
 		return "modflags";
 	}
