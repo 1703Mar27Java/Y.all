@@ -5,12 +5,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
@@ -174,14 +176,18 @@ public class PostController {
 	public String getThread(@PathVariable int threadId, Model m) {
 		AbstractApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		PostDao dao = (PostDao) ac.getBean("myDao");
-		Post op = dao.loadPost(threadId);
-		List<Post> posts = dao.loadThread(threadId);
-		posts.add(0, op);
-		m.addAttribute("op", op);
-		m.addAttribute("post", new Post());
-		m.addAttribute("threadId", threadId);
-		m.addAttribute("listPosts", posts);
-		ac.close();
+		try{
+			Post op = dao.loadPost(threadId);
+			List<Post> posts = dao.loadThread(threadId);
+			posts.add(0, op);
+			m.addAttribute("op", op);
+			m.addAttribute("post", new Post());
+			m.addAttribute("threadId", threadId);
+			m.addAttribute("listPosts", posts);
+			ac.close();
+		}catch (NullPointerException e){
+			return "/errors";
+		}
 		return "thread";
 	}
 
