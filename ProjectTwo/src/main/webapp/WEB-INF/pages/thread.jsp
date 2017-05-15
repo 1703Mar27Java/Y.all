@@ -68,27 +68,27 @@ form {
 			<input name="parent" type="hidden" value="${threadId}" />
 			<table>
 				<tr>
-					<td>Name:</td>
+					<td style="background-color:#0a3a2a; color:white">Name:</td>
 					<td><input placeholder="Anonymous" type="text" name="name" /></td>
 				</tr>
 				<tr>
-					<td>Subject:</td>
-					<td><input type="text" name="subject" /></td>
-				</tr>
-				<tr>
-					<td>Comment:</td>
-					<td><textarea id="comment" name="comment" rows="3" cols="20"></textarea></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="file" name="file" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit"
+					<td style="background-color:#0a3a2a; color:white">Subject:</td>
+					<td><input type="text" name="subject" /><input type="submit"
 						value="Post" /></td>
+				</tr>
+				<tr>
+					<td style="background-color:#0a3a2a; color:white">Comment:</td>
+					<td><textarea id="comment" name="comment" rows="3" cols="30"></textarea></td>
+				</tr>
+				<tr>
+					<td style="background-color:#0a3a2a; color:white">File:</td>
+					<td colspan="2"><input type="file" name="file" /></td>
 				</tr>
 			</table>
 		</form>
 	</div>
+	
+	<hr/>
 
 	<c:forEach var="row" items="${listPosts}">
 		<table id="${row.getId()}" class="posts">
