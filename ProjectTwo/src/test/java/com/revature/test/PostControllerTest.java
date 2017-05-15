@@ -1,32 +1,26 @@
 package com.revature.test;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.junit.*;
+import org.mockito.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.revature.beans.Post;
 import com.revature.controllers.PostController;
+import com.revature.dao.PostDao;
 
 public class PostControllerTest {
 
 	@InjectMocks
     private PostController postController;
+	
+	@Mock
+	private PostDao postDao;
  
     private MockMvc mockMvc;
     
@@ -51,51 +45,6 @@ public class PostControllerTest {
 	    mockMvc.perform(
 	            post("/post"))
 	            .andExpect(forwardedUrl("result"));
-	}
-
-	@Test
-	public void testReportPost() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetThread() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFlagPost() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIgnoreFlag() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testConfirmDelete() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemovePost() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testListImage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testListThumb() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testResizeImage() {
-		fail("Not yet implemented");
 	}
 
 }
