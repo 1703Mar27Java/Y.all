@@ -26,7 +26,6 @@
 			<c:if test="${!moderator.exists()}">
 				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin Login</a></li>
 			</c:if>
-			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
 	</div>
 	<div class="row">

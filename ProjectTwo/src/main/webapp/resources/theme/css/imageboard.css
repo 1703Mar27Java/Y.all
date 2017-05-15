@@ -1,86 +1,89 @@
 @CHARSET "ISO-8859-1";
-body{
-	background: #81b69d;/* #5aa17f */
+
+body {
+	background: #81b69d; /* #5aa17f */
 }
 
-h4{
+h4 {
 	color: red;
-	text-align:center;
+	text-align: center;
 	margin-left: 40%;
 	margin-bottom: 30px;
 }
 
-form{
+form {
 	clear: left;
 	float: left;
-	margin-left:30px;
+	margin-left: 30px;
 }
 
 ul {
 	position: fixed;
-    top: 0;
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	z-index: 1;
 }
 
 li {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 2px 10px;
-    text-decoration: none;
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 2px 10px;
+	text-decoration: none;
 }
-li a{
+
+li a {
 	color: #fff;
 }
 
-a:hover{
-	text-decoration:none;
+a:hover {
+	text-decoration: none;
 	color: #81b69d;
 }
 
-.button{
-    background-color: #92ddc8;
-    border: none;
-    color: #5aa17f;
-    padding: 5px 56px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
+.button {
+	background-color: #92ddc8;
+	border: none;
+	color: #5aa17f;
+	padding: 5px 56px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 
-.redbutton{
-    background-color: red;
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
+.redbutton {
+	background-color: red;
+	border: none;
+	color: white;
+	padding: 5px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 
-.redbutton:hover{
+.redbutton:hover {
 	box-shadow: 0px 5px 5px #888888;
 }
 
-.button:hover{
+.button:hover {
 	box-shadow: 0px 5px 5px #888888;
 }
 
 .posts {
-    border-collapse: collapse;
-	width: 60%;
+	border-collapse: collapse;
+	width: 90%;
 	margin: 18px auto;
 	margin-bottom: 18px auto;
 	border-bottom: 1px solid #ddd;
@@ -90,7 +93,21 @@ a:hover{
 	padding: 5px;
 }
 
-.postForm {	
+.postForm {
 	width: 30%;
 	margin: 0 auto;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+}
+
+.show {
+	display: block;
 }

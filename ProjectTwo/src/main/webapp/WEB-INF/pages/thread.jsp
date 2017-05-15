@@ -41,7 +41,9 @@ form {
 <body>
 	<div id="nav">
 		<ul>
-			<li><a href="/ProjectTwo/board/index"><img src="<c:url value="/resources/static-images/merjpostSmall.png" />" style="max-height:30px;"></a></li>
+			<li><a href="/ProjectTwo/board/index"><img
+					src="<c:url value="/resources/static-images/merjpostSmall.png" />"
+					style="max-height: 30px;"></a></li>
 			<li><a href="/ProjectTwo/board/catalog">Catalog</a></li>
 			<li><a>-> Thread No. <c:out value="${threadId}" /> <c:out
 						value="${op.getSubject()}" /></a></li>
@@ -125,47 +127,24 @@ form {
 	</c:forEach>
 </body>
 <script>
-	$(document).ready(
-			function() {
-				$(".postRow").click(
-						function() {
-							var post = $(this).data('post');
-							var sel = $(this).closest('tr').next('tr').find(
-									'td').text();
-							var txt = $("#comment");
-							if (sel) {
-								sel = ">" + sel;
-							}
-							if (txt.val()) {
-								txt.val(txt.val() + "\n")
-							}
-							txt.val(txt.val() + ">>" + post + "\n" + sel);
-						});
-				setInterval(function() {
-					var chour = new Date().getHours();
-					if (chour > 12)
-						chour -= 12;
-					var cmin = new Date().getMinutes();
-					if (cmin < 10)
-						cmin = '0' + cmin;
-					var csec = new Date().getSeconds();
-					if (csec < 10)
-						csec = '0' + csec;
-					$("#currentTime").html(
-							chour
-									+ ":"
-									+ cmin
-									+ ":"
-									+ csec
-									+ " "
-									+ (new Date().getHours() <= 12 ? 'AM'
-											: 'PM'));
-				}, 1000);
+	$(document).ready(function() {
+		$(".postRow").click(function() {
+			var post = $(this).data('post');
+			var sel = $(this).closest('tr').next('tr').find('td').text();
+			var txt = $("#comment");
+			if (sel) {
+				sel = ">" + sel;
+			}
+			if (txt.val()) {
+				txt.val(txt.val() + "\n")
+			}
+			txt.val(txt.val() + ">>" + post + "\n" + sel);
+		});
 
-				$(".dropbtn").click(function() {
-					$(this).next().toggleClass("show");
-				});
-			});
+		$(".dropbtn").click(function() {
+			$(this).next().toggleClass("show");
+		});
+	});
 
 	function myFunction() {
 		document.getElementsByClassName("dropdown-content").classList

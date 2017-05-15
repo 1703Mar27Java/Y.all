@@ -33,7 +33,6 @@
 				<li style="float: right"><a href="/ProjectTwo/board/modLogin">Admin
 						Login</a></li>
 			</c:if>
-			<li style="float: right"><a id="currentTime"></a></li>
 		</ul>
 	</div>
 
@@ -73,43 +72,4 @@
 		</form>
 	</c:if>
 </body>
-<script>
-	$(document).ready(
-			function() {
-				$(".postRow").click(
-						function() {
-							var post = $(this).data('post');
-							var sel = $(this).closest('tr').next('tr').find(
-									'td').text();
-							var txt = $("#comment");
-							if (sel) {
-								sel = ">" + sel;
-							}
-							if (txt.val()) {
-								txt.val(txt.val() + "\n")
-							}
-							txt.val(txt.val() + ">>" + post + "\n" + sel);
-						});
-				setInterval(function() {
-					var chour = new Date().getHours();
-					if (chour > 12)
-						chour -= 12;
-					var cmin = new Date().getMinutes();
-					if (cmin < 10)
-						cmin = '0' + cmin;
-					var csec = new Date().getSeconds();
-					if (csec < 10)
-						csec = '0' + csec;
-					$("#currentTime").html(
-							chour
-									+ ":"
-									+ cmin
-									+ ":"
-									+ csec
-									+ " "
-									+ (new Date().getHours() <= 12 ? 'AM'
-											: 'PM'));
-				}, 1000);
-			});
-</script>
 </html>

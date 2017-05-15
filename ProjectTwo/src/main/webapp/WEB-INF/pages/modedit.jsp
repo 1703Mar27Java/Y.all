@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form method="POST" action="edit">
-		<input type="text" name="name" value="${post.name}"><br/>
+		<input type="text" name="name" placeholder="Anonymous" value="${post.name}"><br/>
 		<input type="text" name="subject" value="${post.subject}"/><br/>
 		<textarea name="comment" value="${post.comment}"></textarea>
 		<input type="submit" value="Commit">
