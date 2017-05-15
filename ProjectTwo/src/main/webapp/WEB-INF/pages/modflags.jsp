@@ -35,7 +35,7 @@
 					<a target="_blank" href="/ProjectTwo/board/img/${row.getId()}">
 					<img src="/ProjectTwo/board/thmb/${row.getId()}" /></a><br/>
 					<a id="ignore" href="/ProjectTwo/board/thread/${row.getId()}/unflag">
-						<img src="<c:url value="/resources/static-images/ignore.png" />" style="max-width:30px;">
+						<img src="<c:url value="/resources/static-images/ignore.png" />" style="max-width:20px;">
 					</a>
 					<a id="edit" href="/ProjectTwo/board/thread/${row.getId()}/edit">
 						<img src="<c:url value="/resources/static-images/edit.png" />" style="max-width:20px;">
